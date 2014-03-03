@@ -1,0 +1,17 @@
+<h1>Grummle</h1>
+<%= render 'shared/flash' %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <table class="full">
+      <tr>
+        <td><b class="panel-title"><%= t :notes %></b></td>
+        <td class="text-right"><%= link_to t(:newnote), new_note_path, class: 'btn btn-success' %></td>
+      </tr>
+    </table>
+  </div>
+  <ul class="list-group">
+    <% current_user.notes.each do |note| %>
+    <%= link_to note.title, note, class: 'list-group-item' %>
+    <% end %>
+  </ul>
+</div>

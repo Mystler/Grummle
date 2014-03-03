@@ -1,0 +1,6 @@
+testuser:
+  id: 1
+  username: Test
+  email: test@test.com
+  password_digest: <%= BCrypt::Password.create('passawordo') %>
+  auth_token: testtoken

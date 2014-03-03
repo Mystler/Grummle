@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <table class="full">
+      <tr>
+        <td><b class="panel-title"><%= @note.title %></b></td>
+        <td class="text-right">
+          <%= link_to t(:edit), edit_note_path(@note), class: 'btn btn-success' %>
+          <%= link_to t(:delete), @note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="panel-body">
+    <%= markdown(@note.text) %>
+  </div>
+</div>
+<p><%= link_to t(:back), notes_path %></p>

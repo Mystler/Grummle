@@ -1,0 +1,46 @@
+de:
+  notes: Meine Notizen
+  newnote: Neue Notiz
+  edit: Bearbeiten
+  delete: Löschen
+  noteerror: 'Etwas verhinderte, dass diese Notiz gespeichert wird:'
+  notfound: Notiz nicht gefunden
+  back: Zurück
+
+  account: Konto
+  signup: Registrieren
+  loggedin: Sie wurden erfolgreich angemeldet
+  loggedout: Sie wurden erfolgreich abgemeldet
+  login: Anmelden
+  logout: Abmelden
+  usererror: 'Benutzer konnte nicht erstellt werden:'
+  loginfailed: Ungültiger Benutzer und/oder ungültiges Passwort
+  loginrequired: Sie müssen sich Anmelden um diese Seite zu betrachten
+  signedinas: "Angemeldet als %{user}"
+  changepassword: Passwort ändern
+  changedpassword: Sie haben erfolgreich Ihr Passwort geändert
+  pwdoesnotmatch: Ihr aktuelles Passwort ist falsch
+  accountcreated: Ihr Benutzerkonto wurde erstellt
+  rememberme: Angemeldet bleiben
+
+  about: Über
+  language: Sprache
+
+  user: &user
+    username: Nutzername
+    email: E-Mail Adresse
+    password: Passwort
+    password_confirmation: Bestätigung des Passwortes
+    password_old: Altes Passwort
+
+  helpers:
+    submit:
+      create: Speichern
+      update: Speichern
+
+  activerecord:
+    attributes:
+      note:
+        title: Titel
+        text: Notiz
+      user: *user

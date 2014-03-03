@@ -1,0 +1,30 @@
+<h1><%= t :changepassword %></h1>
+<%= form_for @user, url: edituser_path do |f| %>
+  <%= render 'shared/flash' %>
+  <% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <b><%= t :usererror %></b>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <%= label_tag :password_old, t('user.password_old') %><br>
+    <%= password_field_tag :password_old, params[:password_old], class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password %><br>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.submit t(:changepassword), class: 'pull-right btn btn-success' %>
+  </div>
+<% end %>
+<%= link_to t(:back), notes_path %>

@@ -1,0 +1,46 @@
+en:
+  notes: My Notes
+  newnote: New Note
+  edit: Edit
+  delete: Delete
+  noteerror: 'Something prohibited this note from being saved:'
+  notfound: Note not found
+  back: Back
+
+  account: Account
+  signup: Sign Up
+  loggedin: You have successfully been logged in
+  loggedout: You have successfully been logged out
+  login: Log In
+  logout: Log Out
+  usererror: 'Could not create user:'
+  loginfailed: Invalid username and/or password
+  loginrequired: You have to log in to view this page
+  signedinas: "Signed in as %{user}"
+  changepassword: Change Password
+  changedpassword: You have successfully changed your password
+  pwdoesnotmatch: Your current password is wrong
+  accountcreated: Your account has been created
+  rememberme: Remember Me
+
+  about: About
+  language: Language
+
+  user: &user
+    username: Username
+    email: E-Mail Address
+    password: Password
+    password_confirmation: Confirm Password
+    password_old: Old Password
+
+  helpers:
+    submit:
+      create: Save
+      update: Save
+
+  activerecord:
+    attributes:
+      note:
+        title: Title
+        text: Note
+      user: *user

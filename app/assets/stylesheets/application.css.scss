@@ -1,0 +1,27 @@
+/*
+ *= require_self
+ *= require_tree .
+ */
+
+@import 'bootstrap';
+
+$bg-dark: #EEE;
+$bg: #FFF;
+
+body { background-color: $bg-dark; }
+
+.container {
+    margin: 24px auto;
+    padding: 24px;
+    background-color: $bg;
+    border-radius: 12px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 200px;
+}
+
+.full {
+    width: 100%;
+}

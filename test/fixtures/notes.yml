@@ -1,0 +1,16 @@
+testnote:
+  id: 1
+  title: Hello
+  text: This is a note
+  user_id: 1
+
+markupnote:
+  id: 2
+  title: Lorem Ipsum
+  text: '*Dolor*'
+  user_id: 1
+
+userless:
+  id: 3
+  title: test
+  text: Blah
