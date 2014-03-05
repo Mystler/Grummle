@@ -14,3 +14,9 @@ userless:
   id: 3
   title: test
   text: Blah
+
+publicnote:
+  id: 4
+  title: Publique
+  text: Publique
+  public: true

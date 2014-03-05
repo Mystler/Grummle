@@ -2,10 +2,17 @@
   <div class="panel-heading">
     <table class="full">
       <tr>
-        <td><b class="panel-title"><%= @note.title %></b></td>
+        <td>
+          <b class="panel-title"><%= @note.title %></b>
+          <% if @note.public %>
+          <br><i><%= t :publichint %></i>
+          <% end %>
+        </td>
         <td class="text-right">
+          <% if current_user && @note.user_id == current_user.id %>
           <%= link_to t(:edit), edit_note_path(@note), class: 'btn btn-success' %>
           <%= link_to t(:delete), @note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
         </td>
       </tr>
     </table>

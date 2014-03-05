@@ -5,6 +5,7 @@ de:
   delete: Löschen
   noteerror: 'Etwas verhinderte, dass diese Notiz gespeichert wird:'
   notfound: Notiz nicht gefunden
+  publichint: Dies ist eine öffentliche Notiz. Jeder mit dem Link kann sie betrachten.
   back: Zurück
 
   account: Konto
@@ -33,6 +34,11 @@ de:
     password_confirmation: Bestätigung des Passwortes
     password_old: Altes Passwort
 
+  note: &note
+    title: Titel
+    text: Notiz
+    public: Öffentlich
+
   helpers:
     submit:
       create: Speichern
@@ -40,7 +46,5 @@ de:
 
   activerecord:
     attributes:
-      note:
-        title: Titel
-        text: Notiz
+      note: *note
       user: *user

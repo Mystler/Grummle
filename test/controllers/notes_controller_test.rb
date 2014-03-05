@@ -36,8 +36,23 @@ class NotesControllerTest < ActionController::TestCase
 
   test 'access restricted' do
     do_login
+    get :show, id: notes(:userless).id
+    assert_redirected_to notes_path(assigns(:flash), locale: :en), 'Not redirected from userless note'
+    do_logout
+  end
+
+  test 'public notes' do
+    get :show, id: notes(:publicnote).id
+    assert_response :success, 'Fetching public note failed'
+    assert_select 'div.panel-body p', notes(:publicnote).text, 'Text not found in public note'
+  end
+
+  test 'edit public notes' do
+    do_login
+    get :edit, id: notes(:publicnote).id
+    assert_redirected_to notes_path, 'Showed edit page for public note'
     assert_raises(ActiveRecord::RecordNotFound) do
-      User.find(users(:testuser).id).notes.find(notes(:userless).id)
+      patch :update, id: notes(:publicnote).id, note: {title: 'Test'}
     end
     do_logout
   end

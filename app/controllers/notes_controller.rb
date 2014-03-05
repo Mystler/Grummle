@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :require_login
+  before_action :require_login, except: :show
 
   def index
   end
@@ -18,11 +18,15 @@ class NotesController < ApplicationController
   end
 
   def edit
-    find_note_by_id
+    find_user_note_by_id
   end
 
   def show
-    find_note_by_id
+    @note = Note.find_by(id: params[:id], public: true)
+    unless @note
+      require_login
+      find_user_note_by_id if current_user
+    end
   end
 
   def update
@@ -42,10 +46,10 @@ class NotesController < ApplicationController
 
   private
     def note_params
-      params.require(:note).permit(:title, :text)
+      params.require(:note).permit(:title, :text, :public)
     end
 
-    def find_note_by_id
+    def find_user_note_by_id
       begin
         @note = current_user.notes.find(params[:id])
       rescue ActiveRecord::RecordNotFound

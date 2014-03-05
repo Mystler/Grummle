@@ -13,6 +13,11 @@
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>
   </div>
+  <div class="checkbox">
+    <%= f.label :public do %>
+      <%= f.check_box :public %><%= t 'note.public' %>
+    <% end %>
+  </div>
   <div class="form-group">
     <%= f.label :text %><br>
     <%= f.text_area :text, class: 'form-control' %>

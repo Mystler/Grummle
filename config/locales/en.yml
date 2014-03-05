@@ -5,6 +5,7 @@ en:
   delete: Delete
   noteerror: 'Something prohibited this note from being saved:'
   notfound: Note not found
+  publichint: This is a public note. Anyone with the link will be able to view it.
   back: Back
 
   account: Account
@@ -33,6 +34,11 @@ en:
     password_confirmation: Confirm Password
     password_old: Old Password
 
+  note: &note
+    title: Title
+    text: Note
+    public: Public
+
   helpers:
     submit:
       create: Save
@@ -40,7 +46,5 @@ en:
 
   activerecord:
     attributes:
-      note:
-        title: Title
-        text: Note
+      note: *note
       user: *user
