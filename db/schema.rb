@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305154710) do
+ActiveRecord::Schema.define(version: 20140307134938) do
 
   create_table "notes", force: true do |t|
     t.string   "title"
@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 20140305154710) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "public",     default: false, null: false
+    t.string   "permalink"
   end
 
+  add_index "notes", ["permalink"], name: "index_notes_on_permalink"
   add_index "notes", ["user_id"], name: "index_notes_on_user_id"
 
   create_table "users", force: true do |t|

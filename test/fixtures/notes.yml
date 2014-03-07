@@ -3,20 +3,24 @@ testnote:
   title: Hello
   text: This is a note
   user_id: 1
+  permalink: aaa
 
 markupnote:
   id: 2
   title: Lorem Ipsum
   text: '*Dolor*'
   user_id: 1
+  permalink: bbb
 
 userless:
   id: 3
   title: test
   text: Blah
+  permalink: ccc
 
 publicnote:
   id: 4
   title: Publique
   text: Publique
   public: true
+  permalink: ddd

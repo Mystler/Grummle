@@ -18,19 +18,27 @@ class NotesController < ApplicationController
   end
 
   def edit
-    find_user_note_by_id
+    @note = current_user.notes.find_by_permalink!(params[:id])
   end
 
   def show
-    @note = Note.find_by(id: params[:id], public: true)
-    unless @note
-      require_login
-      find_user_note_by_id if current_user
+    @note = Note.find_by_permalink(params[:id])
+    if @note
+      unless @note.public
+        require_login
+        unless @note.user_id == current_user.id
+          flash[:danger] = t :notfound
+          redirect_to notes_path
+        end
+      end
+    else
+      flash[:danger] = t :notfound
+      redirect_to notes_path
     end
   end
 
   def update
-    @note = current_user.notes.find(params[:id])
+    @note = current_user.notes.find_by_permalink!(params[:id])
     if @note.update(note_params)
       redirect_to @note
     else
@@ -39,7 +47,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    @note = current_user.notes.find(params[:id])
+    @note = current_user.notes.find_by_permalink!(params[:id])
     @note.destroy
     redirect_to notes_path
   end
@@ -47,14 +55,5 @@ class NotesController < ApplicationController
   private
     def note_params
       params.require(:note).permit(:title, :text, :public)
-    end
-
-    def find_user_note_by_id
-      begin
-        @note = current_user.notes.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        flash[:danger] = t :notfound
-        redirect_to notes_path
-      end
     end
 end
