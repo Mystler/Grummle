@@ -10,7 +10,7 @@
     </table>
   </div>
   <ul class="list-group">
-    <% current_user.notes.each do |note| %>
+    <% current_user.notes.order(updated_at: :desc).each do |note| %>
     <%= link_to note.title, note, class: 'list-group-item' %>
     <% end %>
   </ul>
