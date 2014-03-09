@@ -8,12 +8,13 @@ class User < ActiveRecord::Base
 
   has_many :notes
 
-  def generate_auth_token!
+  before_save :generate_auth_token
+
+  def generate_auth_token
     begin
       token = SecureRandom.urlsafe_base64
     end while User.exists?(auth_token: token)
     self.auth_token = token
     self.auth_token_updated = DateTime.now
-    save!(validate: false)
   end
 end

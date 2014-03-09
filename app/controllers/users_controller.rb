@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user = current_user
     user = @user.authenticate(params[:password_old])
     if user && @user.update(change_password_params)
+      cookies[:auth_token] = @user.auth_token
       flash[:success] = t :changedpassword
       redirect_to notes_path
     else

@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
     if user
       reset_session
-      user.generate_auth_token!
       if params[:remember_me]
         cookies.permanent[:auth_token] = user.auth_token
       else
@@ -21,6 +20,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # Generate a new auth token (before_save action)
+    current_user.save!(validate: false) if current_user
     cookies.delete :auth_token
     reset_session
     flash[:success] = t :loggedout
