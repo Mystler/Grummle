@@ -8,8 +8,8 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'bootstrap-sass'
-gem 'redcarpet'
 gem 'bcrypt-ruby'
+gem 'github-markdown'
 
 group :development, :test do
   gem 'sqlite3'

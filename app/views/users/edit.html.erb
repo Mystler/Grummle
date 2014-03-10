@@ -13,7 +13,7 @@
   <% end %>
   <div class="form-group">
     <%= label_tag :password_old, t('user.password_old') %><br>
-    <%= password_field_tag :password_old, params[:password_old], class: 'form-control' %>
+    <%= password_field_tag :password_old, params[:password_old], class: 'form-control', autofocus: true %>
   </div>
   <div class="form-group">
     <%= f.label :password %><br>

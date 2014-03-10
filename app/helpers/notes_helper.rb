@@ -1,6 +1,5 @@
 module NotesHelper
   def markdown(text)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true)
-    sanitize markdown.render(text)
+    sanitize GitHub::Markdown.render_gfm(text)
   end
 end

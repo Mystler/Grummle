@@ -3,7 +3,7 @@
   <%= render 'shared/flash' %>
   <div class="form-group">
     <%= label_tag :username, t('user.username') %>
-    <%= text_field_tag :username, params[:username], class: 'form-control' %>
+    <%= text_field_tag :username, params[:username], class: 'form-control', autofocus: true %>
   </div>
   <div class="form-group">
     <%= label_tag :password, t('user.password') %><br>
