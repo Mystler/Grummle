@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310170425) do
+ActiveRecord::Schema.define(version: 20140718145441) do
 
   create_table "notes", force: true do |t|
     t.string   "title"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140310170425) do
     t.datetime "updated_at"
     t.string   "auth_token"
     t.datetime "auth_token_updated"
+    t.boolean  "activated"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token"

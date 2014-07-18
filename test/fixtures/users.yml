@@ -4,3 +4,4 @@ testuser:
   email: test@test.com
   password_digest: <%= BCrypt::Password.create('passawordo') %>
   auth_token: testtoken
+  activated: true

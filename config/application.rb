@@ -22,5 +22,7 @@ module Grummle
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
     config.i18n.available_locales = [:en, :de]
+
+    config.action_mailer.default_options = {from: 'Grummle <noreply@mystler.eu>'}
   end
 end

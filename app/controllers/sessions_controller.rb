@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_username(params[:username]).try(:authenticate, params[:password])
-    if user
+    if user && user.activated
       reset_session
       if params[:remember_me]
         cookies.permanent[:auth_token] = user.auth_token
@@ -14,7 +14,11 @@ class SessionsController < ApplicationController
       flash[:success] = t :loggedin
       redirect_to notes_path
     else
-      flash.now[:danger] = t :loginfailed
+      if user && !user.activated
+        flash.now[:danger] = t :notactivated
+      else
+        flash.now[:danger] = t :loginfailed
+      end
       render 'new'
     end
   end

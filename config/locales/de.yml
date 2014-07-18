@@ -21,7 +21,9 @@ de:
   changepassword: Passwort ändern
   changedpassword: Sie haben erfolgreich Ihr Passwort geändert
   pwdoesnotmatch: Ihr aktuelles Passwort ist falsch
-  accountcreated: Ihr Benutzerkonto wurde erstellt
+  accountcreated: Ihr Benutzerkonto wurde erstellt und Sie sollten eine E-Mail zur Aktivierung erhalten haben
+  notactivated: Ihr Benutzerkonto ist nicht aktiviert
+  activated: Ihr Benutzerkonto wurde aktiviert
   rememberme: Angemeldet bleiben
 
   about: Über

@@ -12,6 +12,13 @@ class AccountTest < ActionDispatch::IntegrationTest
     assert_equal login_path, path, 'Signing up failed'
     assert flash[:success]
 
+    # Activate
+    token = User.find_by_username('Integration').auth_token
+    invite_email = ActionMailer::Base.deliveries.last
+    assert_match activate_path(username: 'Integration', token: token), invite_email.body.to_s, 'Wrong link in mail'
+    get_via_redirect activate_path username: 'Integration', token: token
+    assert flash[:success]
+
     # Log in
     post_via_redirect login_path, username: 'Integration', password: 'testtest'
     assert_equal notes_path, path, 'Logging in failed'

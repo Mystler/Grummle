@@ -1,12 +1,15 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:edit, :update]
+
   def new
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
+    @user.activated = false
     if @user.save
+      UserMailer.registered_email(@user).deliver
       flash[:success] = t :accountcreated
       redirect_to login_path
     else
@@ -29,6 +32,14 @@ class UsersController < ApplicationController
       flash.now[:danger] = t :pwdoesnotmatch unless user
       render 'edit'
     end
+  end
+
+  def activate
+    @user = User.find_by!(username: params[:username], auth_token: params[:token], activated: false)
+    @user.activated = true
+    @user.save!(validate: false)
+    flash[:success] = t :activated
+    redirect_to login_path
   end
 
   private

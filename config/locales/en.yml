@@ -21,7 +21,9 @@ en:
   changepassword: Change Password
   changedpassword: You have successfully changed your password
   pwdoesnotmatch: Your current password is wrong
-  accountcreated: Your account has been created
+  accountcreated: Your account has been created and you should have got an e-mail to activate it
+  notactivated: Your account is not activated
+  activated: Your account has been activated
   rememberme: Remember Me
 
   about: About

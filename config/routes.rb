@@ -8,6 +8,8 @@ Grummle::Application.routes.draw do
     post 'signup' => 'users#create'
     get 'edituser' => 'users#edit'
     patch 'edituser' => 'users#update'
+    get 'activate/:username/:token', to: 'users#activate', as: 'activate'
+
     get 'login' => 'sessions#new'
     post 'login' => 'sessions#create'
     get 'logout' => 'sessions#destroy'
