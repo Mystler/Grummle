@@ -15,7 +15,8 @@ class SessionsController < ApplicationController
       redirect_to notes_path
     else
       if user && !user.activated
-        flash.now[:danger] = t :notactivated
+        link = ActionController::Base.helpers.link_to t(:requestactivation), resend_activation_path(username: user.username)
+        flash.now[:danger] = "#{t :notactivated} #{link}".html_safe
       else
         flash.now[:danger] = t :loginfailed
       end

@@ -10,21 +10,26 @@ en:
 
   account: Account
   signup: Sign Up
-  loggedin: You have successfully been logged in
-  loggedout: You have successfully been logged out
+  loggedin: You have successfully been logged in.
+  loggedout: You have successfully been logged out.
   login: Log In
   logout: Log Out
   usererror: 'Could not create user:'
   loginfailed: Invalid username and/or password
-  loginrequired: You have to log in to view this page
+  loginrequired: You have to log in to view this page.
   signedinas: "Signed in as %{user}"
   changepassword: Change Password
-  changedpassword: You have successfully changed your password
-  pwdoesnotmatch: Your current password is wrong
-  accountcreated: Your account has been created and you should have got an e-mail to activate it
-  notactivated: Your account is not activated
-  activated: Your account has been activated
+  changedpassword: You have successfully changed your password.
+  pwdoesnotmatch: Your current password is wrong.
+  accountcreated: Your account has been created and you should have got an e-mail to activate it.
+  notactivated: Your account is not activated.
+  activated: Your account has been activated.
   rememberme: Remember Me
+  activationrequested: Your activation e-mail has been re-sent.
+  requestactivation: Re-send activation e-mail
+
+  registered_email_subject: '[Grummle] Account Registered'
+  activation_email_subject: '[Grummle] Account Activation'
 
   about: About
   language: Language

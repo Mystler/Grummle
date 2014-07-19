@@ -1,0 +1,9 @@
+Grummle Kontoaktivierung
+========================
+ 
+<%= @user.username %>, Sie müssen Ihr Grummle-Konto aktivieren.
+ 
+Um sich auf der Seite anzumelden, müssen Sie Ihre E-Mail Adresse verifizieren, indem Sie auf folgenden Link klicken:
+<%= activate_url username: @user.username, token: @user.auth_token %>
+ 
+Viel Spaß mit Grummle!

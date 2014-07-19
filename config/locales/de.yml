@@ -10,21 +10,26 @@ de:
 
   account: Konto
   signup: Registrieren
-  loggedin: Sie wurden erfolgreich angemeldet
-  loggedout: Sie wurden erfolgreich abgemeldet
+  loggedin: Sie wurden erfolgreich angemeldet.
+  loggedout: Sie wurden erfolgreich abgemeldet.
   login: Anmelden
   logout: Abmelden
   usererror: 'Benutzer konnte nicht erstellt werden:'
   loginfailed: Ungültiger Benutzer und/oder ungültiges Passwort
-  loginrequired: Sie müssen sich Anmelden um diese Seite zu betrachten
+  loginrequired: Sie müssen sich Anmelden um diese Seite zu betrachten.
   signedinas: "Angemeldet als %{user}"
   changepassword: Passwort ändern
-  changedpassword: Sie haben erfolgreich Ihr Passwort geändert
-  pwdoesnotmatch: Ihr aktuelles Passwort ist falsch
-  accountcreated: Ihr Benutzerkonto wurde erstellt und Sie sollten eine E-Mail zur Aktivierung erhalten haben
-  notactivated: Ihr Benutzerkonto ist nicht aktiviert
-  activated: Ihr Benutzerkonto wurde aktiviert
+  changedpassword: Sie haben erfolgreich Ihr Passwort geändert.
+  pwdoesnotmatch: Ihr aktuelles Passwort ist falsch.
+  accountcreated: Ihr Benutzerkonto wurde erstellt und Sie sollten eine E-Mail zur Aktivierung erhalten haben.
+  notactivated: Ihr Benutzerkonto ist nicht aktiviert.
+  activated: Ihr Benutzerkonto wurde aktiviert.
   rememberme: Angemeldet bleiben
+  activationrequested: Ihre Aktivierungs-E-Mail wurde erneut versendet.
+  requestactivation: Versende Aktivierungs-E-Mail erneut
+
+  registered_email_subject: '[Grummle] Konto Registriert'
+  activation_email_subject: '[Grummle] Kontoaktivierung'
 
   about: Über
   language: Sprache

@@ -42,6 +42,13 @@ class UsersController < ApplicationController
     redirect_to login_path
   end
 
+  def resend_activation
+    @user = User.find_by!(username: params[:username], activated: false)
+    UserMailer.activation_email(@user).deliver
+    flash[:success] = t :activationrequested
+    redirect_to login_path
+  end
+
   private
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
