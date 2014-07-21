@@ -4,32 +4,34 @@ class AccountTest < ActionDispatch::IntegrationTest
   fixtures :notes
 
   test 'user scenario' do
-    # Create a new user
+    # Create a new user (including UTF-8 characters that have to be escaped properly)
     get signup_path
     assert_response :success
-    post_via_redirect signup_path, user: { username: 'Integration', email: 'int@gration.test', password: 'testtest',
+    post_via_redirect signup_path, user: { username: 'Üßerdingens♪♫', email: 'int@gration.test', password: 'testtest',
       password_confirmation: 'testtest' }
     assert_equal login_path, path, 'Signing up failed'
     assert flash[:success]
 
     # Test activaton mails and activate
-    token = User.find_by_username('Integration').auth_token
+    token = User.find_by_username('Üßerdingens♪♫').auth_token
     email = ActionMailer::Base.deliveries.last
-    assert_match activate_path(username: 'Integration', token: token), email.body.to_s, 'Wrong link in mail'
+    assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
+    assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
 
-    get_via_redirect resend_activation_path(username: 'Integration')
+    get_via_redirect resend_activation_path(username: 'Üßerdingens♪♫')
     assert flash[:success]
     email = ActionMailer::Base.deliveries.last
-    assert_match activate_path(username: 'Integration', token: token), email.body.to_s, 'Wrong link in mail'
+    assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
+    assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
 
-    post_via_redirect login_path, username: 'Integration', password: 'testtest'
+    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'testtest'
     assert_equal login_path, path, 'Logging in should have failed'
-    assert_match resend_activation_path(username: 'Integration'), flash[:danger], 'Cannot request activation e-mail'
-    get_via_redirect activate_path(username: 'Integration', token: token)
+    assert_match resend_activation_path(username: 'Üßerdingens♪♫'), flash[:danger], 'Cannot request activation e-mail'
+    get_via_redirect activate_path(username: 'Üßerdingens♪♫', token: token)
     assert flash[:success]
 
     # Log in
-    post_via_redirect login_path, username: 'Integration', password: 'testtest'
+    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'testtest'
     assert_equal notes_path, path, 'Logging in failed'
     assert flash[:success]
 
@@ -61,7 +63,7 @@ class AccountTest < ActionDispatch::IntegrationTest
     assert flash[:success]
 
     # Login and out again with new password
-    post_via_redirect login_path, username: 'Integration', password: 'newnewnew'
+    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'newnewnew'
     assert_equal notes_path, path
     assert flash[:success]
     get_via_redirect logout_path

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Willkommen bei Grummle</h1>
+    <p><%= @user.username %>, Sie haben erfolgreich ein Grummle-Konto angelegt.</p>
+    <p>
+      Um sich auf der Seite anzumelden, müssen Sie Ihre E-Mail Adresse verifizieren, indem Sie auf folgenden Link klicken:<br>
+      <%= link_to 'Konto aktivieren', activate_url(username: @user.username, token: @user.auth_token) %>
+    </p>
+    <p>Danke, dass Sie sich für Grummle entschieden haben!</p>
+  </body>
+</html>
