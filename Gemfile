@@ -8,7 +8,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'bootstrap-sass'
-gem 'bcrypt-ruby'
+gem 'bcrypt'
 gem 'github-markdown'
 
 group :development, :test do
