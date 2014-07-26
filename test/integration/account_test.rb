@@ -69,5 +69,31 @@ class AccountTest < ActionDispatch::IntegrationTest
     get_via_redirect logout_path
     assert_equal login_path, path
     assert flash[:success]
+
+    # Test the password reset
+    get forgot_password_path
+    assert_response :success
+    post_via_redirect reset_password_path, username: 'Üßerdingens♪♫', email: 'int@gration.test'
+    assert_equal login_path, path, 'Not redirected to login'
+    assert flash[:success]
+
+    token = User.find_by_username('Üßerdingens♪♫').auth_token
+    email = ActionMailer::Base.deliveries.last
+    assert_match new_password_path(username: 'Üßerdingens♪♫', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
+    assert_match new_password_path(username: 'Üßerdingens♪♫', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
+
+    get new_password_path(username: 'Üßerdingens♪♫', token: token)
+    assert_response :success
+    patch_via_redirect update_password_path(username: 'Üßerdingens♪♫', token: token), user: { password: 'testtest',
+      password_confirmation: 'testtest' }
+    assert_equal login_path, path, 'Not redirected to login'
+    assert flash[:success]
+
+    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'testtest'
+    assert_equal notes_path, path
+    assert flash[:success]
+    get_via_redirect logout_path
+    assert_equal login_path, path
+    assert flash[:success]
   end
 end

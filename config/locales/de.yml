@@ -27,9 +27,14 @@ de:
   rememberme: Angemeldet bleiben
   activationrequested: Ihre Aktivierungs-E-Mail wurde erneut versendet.
   requestactivation: Versende Aktivierungs-E-Mail erneut
+  resetpassword: Passwort Zurücksetzen
+  forgotpassword: Passwort vergessen?
+  accountnotfound: Es wurde kein Konto für Nutzename und E-Mail Adresse gefunden.
+  passwordresetemail: Sie sollten eine E-Mail erhalten haben um ein neues Passwort zu erstellen.
 
   registered_email_subject: '[Grummle] Konto Registriert'
   activation_email_subject: '[Grummle] Kontoaktivierung'
+  password_email_subject: '[Grummle] Passwort Zurücksetzen'
 
   about: Über
   language: Sprache

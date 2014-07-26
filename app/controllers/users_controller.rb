@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:edit, :update]
 
+  # Sign up
   def new
     @user = User.new
   end
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Password change when logged in
   def edit
     @user = current_user
   end
@@ -34,6 +36,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # E-Mail verification
   def activate
     @user = User.find_by!(username: params[:username], auth_token: params[:token], activated: false)
     @user.activated = true
@@ -49,6 +52,37 @@ class UsersController < ApplicationController
     redirect_to login_path
   end
 
+  # Password reset
+  def forgot_password
+  end
+
+  def reset_password
+    @user = User.find_by(username: params[:username], email: params[:email])
+    if @user
+      UserMailer.password_email(@user).deliver
+      flash[:success] = t :passwordresetemail
+      redirect_to login_path
+    else
+      flash.now[:danger] = t :accountnotfound
+      render 'forgot_password'
+    end
+  end
+
+  def new_password
+    @user = User.find_by!(username: params[:username], auth_token: params[:token])
+  end
+
+  def update_password
+    @user = User.find_by!(username: params[:username], auth_token: params[:token])
+    if @user.update(change_password_params)
+      flash[:success] = t :changedpassword
+      redirect_to login_path
+    else
+      render 'new_password'
+    end
+  end
+
+  # Params
   private
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)

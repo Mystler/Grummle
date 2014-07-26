@@ -8,4 +8,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: @user.email, subject: t(:activation_email_subject))
   end
+
+  def password_email(user)
+    @user = user
+    mail(to: @user.email, subject: t(:password_email_subject))
+  end
 end
