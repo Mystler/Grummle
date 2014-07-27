@@ -14,12 +14,13 @@ en:
   loggedout: You have successfully been logged out.
   login: Log In
   logout: Log Out
-  usererror: 'Could not create user:'
+  usererror: 'Invalid user data:'
   loginfailed: Invalid username and/or password
   loginrequired: You have to log in to view this page.
   signedinas: "Signed in as %{user}"
-  changepassword: Change Password
-  changedpassword: You have successfully changed your password.
+  edituser: Account Settings
+  passwordchanged: You have successfully changed your password.
+  emailchange: Please look into your inbox and confirm your new e-mail-address.
   pwdoesnotmatch: Your current password is wrong.
   accountcreated: Your account has been created and you should have got an e-mail to activate it.
   notactivated: Your account is not activated.
@@ -31,10 +32,12 @@ en:
   forgotpassword: Forgot your password?
   accountnotfound: No account with that username and e-mail address has been found.
   passwordresetemail: You should have got an e-mail to create a new password.
+  emailchangeconfirmed: Your new e-mail address has been confirmed.
 
   registered_email_subject: '[Grummle] Account Registered'
   activation_email_subject: '[Grummle] Account Activation'
   password_email_subject: '[Grummle] Password Reset'
+  change_email_subject: '[Grummle] E-Mail Address Change'
 
   about: About
   language: Language
@@ -44,7 +47,8 @@ en:
     email: E-Mail Address
     password: Password
     password_confirmation: Confirm Password
-    password_old: Old Password
+    password_new: New Password (optional)
+    password_old: Current Password
 
   note: &note
     title: Title

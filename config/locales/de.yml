@@ -14,12 +14,13 @@ de:
   loggedout: Sie wurden erfolgreich abgemeldet.
   login: Anmelden
   logout: Abmelden
-  usererror: 'Benutzer konnte nicht erstellt werden:'
+  usererror: 'Ungültige Benutzerdaten:'
   loginfailed: Ungültiger Benutzer und/oder ungültiges Passwort
   loginrequired: Sie müssen sich Anmelden um diese Seite zu betrachten.
   signedinas: "Angemeldet als %{user}"
-  changepassword: Passwort ändern
-  changedpassword: Sie haben erfolgreich Ihr Passwort geändert.
+  edituser: Konto-Einstellungen
+  passwordchanged: Sie haben erfolgreich Ihr Passwort geändert.
+  emailchange: Bitte schauen Sie in ihr Postfach und bestätigen Sie ihre neue E-Mail-Adresse.
   pwdoesnotmatch: Ihr aktuelles Passwort ist falsch.
   accountcreated: Ihr Benutzerkonto wurde erstellt und Sie sollten eine E-Mail zur Aktivierung erhalten haben.
   notactivated: Ihr Benutzerkonto ist nicht aktiviert.
@@ -31,10 +32,12 @@ de:
   forgotpassword: Passwort vergessen?
   accountnotfound: Es wurde kein Konto für Nutzename und E-Mail Adresse gefunden.
   passwordresetemail: Sie sollten eine E-Mail erhalten haben um ein neues Passwort zu erstellen.
+  emailchangeconfirmed: Ihre neue E-Mail-Adresse wurde bestätigt.
 
   registered_email_subject: '[Grummle] Konto Registriert'
   activation_email_subject: '[Grummle] Kontoaktivierung'
   password_email_subject: '[Grummle] Passwort Zurücksetzen'
+  change_email_subject: '[Grummle] E-Mail-Adresse Ändern'
 
   about: Über
   language: Sprache
@@ -44,7 +47,8 @@ de:
     email: E-Mail Adresse
     password: Passwort
     password_confirmation: Bestätigung des Passwortes
-    password_old: Altes Passwort
+    password_new: Neues Passwort (optional)
+    password_old: Aktuelles Passwort
 
   note: &note
     title: Titel

@@ -49,12 +49,22 @@ class AccountTest < ActionDispatch::IntegrationTest
       delete note_path(notes(:testnote).permalink)
     end
 
-    # Change Password
+    # Change Password and e-mail
     get edituser_path
     assert_response :success
     patch_via_redirect edituser_path, password_old: 'testtest', user: { password: 'newnewnew',
-      password_confirmation: 'newnewnew'}
-    assert_equal notes_path, path, 'Changing the password failed'
+      password_confirmation: 'newnewnew', email: 'int2@gration.test' }
+    assert_equal edituser_path, path, 'Uhm... why have we been redirected?'
+    assert flash[:success]
+    assert flash[:warning]
+    assert_equal 'int@gration.test', User.find_by_username('Üßerdingens♪♫').email, 'E-mail should not have changed yet'
+    token = User.find_by_username('Üßerdingens♪♫').auth_token
+    email = ActionMailer::Base.deliveries.last
+    assert_equal ['int2@gration.test'], email.to, 'Not sending to new e-mail address'
+    assert_match update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
+    assert_match update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
+    get_via_redirect update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token)
+    assert_equal notes_path, path, 'Expected redirect to notes overview'
     assert flash[:success]
 
     # Log out
@@ -73,7 +83,7 @@ class AccountTest < ActionDispatch::IntegrationTest
     # Test the password reset
     get forgot_password_path
     assert_response :success
-    post_via_redirect reset_password_path, username: 'Üßerdingens♪♫', email: 'int@gration.test'
+    post_via_redirect reset_password_path, username: 'Üßerdingens♪♫', email: 'int2@gration.test'
     assert_equal login_path, path, 'Not redirected to login'
     assert flash[:success]
 

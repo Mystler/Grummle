@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Grummle E-Mail-Adresse Ändern</h1>
+    <p><%= @user.username %>, Sie möchten Ihre E-Mail-Adresse ändern.</p>
+    <p>
+      Bestätigen Sie, dass dies Ihre neue E-Mail-Adresse ist, indem Sie auf folgenden Link klicken:<br>
+      <%= link_to 'E-Mail-Adresse bestätigen', update_email_url(username: @user.username, email: @user.email, token: @user.auth_token).html_safe %>
+    </p>
+    <p>Danke, dass Sie Grummle nutzen und einen schönen Tag noch!</p>
+  </body>
+</html>

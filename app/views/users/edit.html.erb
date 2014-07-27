@@ -1,4 +1,4 @@
-<h1><%= t :changepassword %></h1>
+<h1><%= t :edituser %></h1>
 <%= form_for @user, url: edituser_path do |f| %>
   <%= render 'shared/flash' %>
   <% if @user.errors.any? %>
@@ -16,7 +16,11 @@
     <%= password_field_tag :password_old, params[:password_old], class: 'form-control', autofocus: true %>
   </div>
   <div class="form-group">
-    <%= f.label :password %><br>
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :password, t('user.password_new') %><br>
     <%= f.password_field :password, class: 'form-control' %>
   </div>
   <div class="form-group">
@@ -24,7 +28,7 @@
     <%= f.password_field :password_confirmation, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.submit t(:changepassword), class: 'pull-right btn btn-success' %>
+    <%= f.submit class: 'pull-right btn btn-success' %>
   </div>
 <% end %>
 <%= link_to t(:back), notes_path %>

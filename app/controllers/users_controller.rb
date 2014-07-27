@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(new_user_params)
     @user.activated = false
     if @user.save
       UserMailer.registered_email(@user).deliver
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # Password change when logged in
+  # Changing account information
   def edit
     @user = current_user
   end
@@ -26,21 +26,29 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     user = @user.authenticate(params[:password_old])
-    if user && @user.update(change_password_params)
-      cookies[:auth_token] = @user.auth_token
-      flash[:success] = t :changedpassword
-      redirect_to notes_path
+    if user
+      if !params[:user][:password].blank? && @user.update(change_password_params)
+        cookies[:auth_token] = @user.auth_token
+        flash.now[:success] = t :passwordchanged
+      end
+      if params[:user][:email] != @user.email
+        @user.email = params[:user][:email]
+        if @user.valid?
+          UserMailer.change_email_email(@user).deliver
+          flash.now[:warning] = t :emailchange
+        end
+      end
     else
-      flash.now[:danger] = t :pwdoesnotmatch unless user
-      render 'edit'
+      flash.now[:danger] = t :pwdoesnotmatch
     end
+    render 'edit'
   end
 
   # E-Mail verification
   def activate
     @user = User.find_by!(username: params[:username], auth_token: params[:token], activated: false)
     @user.activated = true
-    @user.save!(validate: false)
+    @user.save!
     flash[:success] = t :activated
     redirect_to login_path
   end
@@ -50,6 +58,15 @@ class UsersController < ApplicationController
     UserMailer.activation_email(@user).deliver
     flash[:success] = t :activationrequested
     redirect_to login_path
+  end
+
+  def update_email
+    @user = User.find_by!(username: params[:username], auth_token: params[:token])
+    @user.email = params[:email]
+    @user.save!
+    cookies[:auth_token] = @user.auth_token
+    flash[:success] = t :emailchangeconfirmed
+    redirect_to notes_path
   end
 
   # Password reset
@@ -84,7 +101,7 @@ class UsersController < ApplicationController
 
   # Params
   private
-    def user_params
+    def new_user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 

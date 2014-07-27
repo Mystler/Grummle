@@ -1,0 +1,9 @@
+Grummle E-Mail Address Change
+=============================
+
+<%= @user.username %>, you have requested to change your e-mail address.
+
+Confirm that this is your new e-mail address by clicking on this link:
+<%= update_email_url username: @user.username, email: @user.email, token: @user.auth_token %>
+
+Thanks for using Grummle and have a nice day!

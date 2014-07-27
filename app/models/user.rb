@@ -1,12 +1,10 @@
 class User < ActiveRecord::Base
   has_secure_password
+  has_many :notes
 
   validates :username, uniqueness: { case_sensitive: false }, length: { in: 3..24 }, format: { with: /\A\S+\Z/ }
   validates :email, uniqueness: { case_sensitive: false }, format: { with: /\S+@\S+\.\w+/ }
-  validates :password, confirmation: true, length: { minimum: 7 }
-  validates :password_confirmation, presence: true
-
-  has_many :notes
+  validates :password, length: { minimum: 7 }, allow_nil: true
 
   before_save :generate_auth_token
 

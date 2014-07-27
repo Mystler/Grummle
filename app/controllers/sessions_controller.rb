@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 
   def destroy
     # Generate a new auth token (before_save action)
-    current_user.save!(validate: false) if current_user
+    current_user.save! if current_user
     cookies.delete :auth_token
     reset_session
     flash[:success] = t :loggedout

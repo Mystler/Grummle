@@ -8,7 +8,7 @@
     <p><%= @user.username %>, you have to activate your Grummle account.</p>
     <p>
       In order to be able to login to the site, you have to verify your e-mail address by clicking this link:<br>
-      <%= link_to 'Activate Account', activate_url(username: @user.username, token: @user.auth_token) %>
+      <%= link_to 'Activate Account', activate_url(username: @user.username, token: @user.auth_token).html_safe %>
     </p>
     <p>Enjoy using Grummle!</p>
   </body>

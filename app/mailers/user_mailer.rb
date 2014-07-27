@@ -13,4 +13,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail(to: @user.email, subject: t(:password_email_subject))
   end
+
+  def change_email_email(user)
+    @user = user
+    mail(to: @user.email, subject: t(:change_email_subject))
+  end
 end
