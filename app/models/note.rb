@@ -1,8 +1,9 @@
 class Note < ActiveRecord::Base
+  belongs_to :user
+  has_many :shared_notes, dependent: :destroy
+
   validates :title, length: { minimum: 5 }
   validates :text, presence: true
-
-  belongs_to :user
 
   before_create :generate_permalink
 

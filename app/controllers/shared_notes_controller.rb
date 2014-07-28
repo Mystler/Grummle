@@ -1,0 +1,2 @@
+class SharedNotesController < ApplicationController
+end
