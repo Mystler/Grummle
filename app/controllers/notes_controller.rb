@@ -1,5 +1,7 @@
 class NotesController < ApplicationController
   before_action :require_login, except: :show
+  helper_method :my_note?
+  helper_method :shared_with_me?
 
   def index
   end
@@ -26,7 +28,8 @@ class NotesController < ApplicationController
     if @note
       unless @note.public
         require_login
-        unless @note.user_id == current_user.id
+        return unless current_user
+        unless my_note?(@note) || shared_with_me?(@note)
           flash[:danger] = t :notfound
           redirect_to notes_path
         end
@@ -55,5 +58,13 @@ class NotesController < ApplicationController
   private
     def note_params
       params.require(:note).permit(:title, :text, :public)
+    end
+
+    def my_note?(note)
+      current_user && current_user.id == note.user_id
+    end
+
+    def shared_with_me?(note)
+      current_user && current_user.shared_notes.find_by_note_id(note.id)
     end
 end

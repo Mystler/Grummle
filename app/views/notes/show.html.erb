@@ -9,8 +9,9 @@
           <% end %>
         </td>
         <td class="text-right">
-          <% if current_user && @note.user_id == current_user.id %>
-          <%= link_to t(:edit), edit_note_path(@note), class: 'btn btn-success' %>
+          <%= link_to t(:edit), edit_note_path(@note), class: 'btn btn-success' if my_note?(@note) || shared_with_me?(@note) %>
+          <% if my_note?(@note) %>
+          <%= link_to t(:share), note_share_index_path(@note), class: 'btn btn-info' %>
           <%= link_to t(:delete), @note, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
           <% end %>
         </td>

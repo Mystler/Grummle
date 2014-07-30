@@ -8,6 +8,14 @@ en:
   publichint: This is a public note. Anyone with the link will be able to view it.
   back: Back
 
+  nopermission: You have no permission to view this site.
+  sharedwith: shared with
+  share: Share
+  add: Add
+  noteshared: You have successfully shared this note.
+  sharingfailed: Could not share this note. Maybe the user you want to share with does not exist.
+  sharedwithme: Shared With Me
+
   account: Account
   signup: Sign Up
   loggedin: You have successfully been logged in.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718145441) do
+ActiveRecord::Schema.define(version: 20140728104603) do
 
   create_table "notes", force: true do |t|
     t.string   "title"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20140718145441) do
 
   add_index "notes", ["permalink"], name: "index_notes_on_permalink"
   add_index "notes", ["user_id"], name: "index_notes_on_user_id"
+
+  create_table "shared_notes", force: true do |t|
+    t.integer  "note_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shared_notes", ["note_id"], name: "index_shared_notes_on_note_id"
+  add_index "shared_notes", ["user_id"], name: "index_shared_notes_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "username"

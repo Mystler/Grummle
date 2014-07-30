@@ -1,0 +1,42 @@
+<h1>Grummle</h1>
+<%= render 'shared/flash' %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <table class="full">
+      <tr>
+        <td><b class="panel-title"><%= @note.title %> <%= t :sharedwith %></b></td>
+        <td class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#dlgAdd"><%= t :add %></button></td>
+      </tr>
+    </table>
+  </div>
+  <ul class="list-group">
+    <% @note.shared_notes.each do |share| %>
+    <li class="list-group-item"><%= share.user.username %></li>
+    <% end %>
+  </ul>
+</div>
+<%= link_to t(:back), @note %>
+
+<!-- Add Dialog -->
+<div class="modal fade" id="dlgAdd" tabindex="-1" role="dialog" aria-labelledby="lblAdd" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="lblAdd"><%= t :share %></h4>
+      </div>
+      <%= form_tag note_share_index_path(@note) do |f| %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= label_tag :username, t('user.username') %><br>
+            <%= text_field_tag :username, params[:username], class: 'form-control', autofocus: true %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= submit_tag t(:add), class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

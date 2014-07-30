@@ -8,6 +8,14 @@ de:
   publichint: Dies ist eine öffentliche Notiz. Jeder mit dem Link kann sie betrachten.
   back: Zurück
 
+  nopermission: Sie haben keine Berechtigung diese Seite zu sehen.
+  sharedwith: geteilt mit
+  share: Teilen
+  add: Hinzufügen
+  noteshared: Sie haben diese Notiz erfolgreich geteilt.
+  sharingfailed: 'Notiz konnte nicht geteilt werden. Es ist möglich, dass der gewünschte Benutzer nicht existiert.'
+  sharedwithme: Mit Mir Geteilt
+
   account: Konto
   signup: Registrieren
   loggedin: Sie wurden erfolgreich angemeldet.
