@@ -1,6 +1,6 @@
 class Note < ActiveRecord::Base
   belongs_to :user
-  has_many :shared_notes, dependent: :destroy
+  has_many :shares, dependent: :destroy
 
   validates :title, length: { minimum: 5 }
   validates :text, presence: true

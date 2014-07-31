@@ -26,15 +26,13 @@ ActiveRecord::Schema.define(version: 20140728104603) do
   add_index "notes", ["permalink"], name: "index_notes_on_permalink"
   add_index "notes", ["user_id"], name: "index_notes_on_user_id"
 
-  create_table "shared_notes", force: true do |t|
-    t.integer  "note_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "shares", force: true do |t|
+    t.integer "note_id"
+    t.integer "user_id"
   end
 
-  add_index "shared_notes", ["note_id"], name: "index_shared_notes_on_note_id"
-  add_index "shared_notes", ["user_id"], name: "index_shared_notes_on_user_id"
+  add_index "shares", ["note_id"], name: "index_shares_on_note_id"
+  add_index "shares", ["user_id"], name: "index_shares_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "username"

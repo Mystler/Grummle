@@ -1,7 +1,7 @@
 Grummle::Application.routes.draw do
   scope '(:locale)', locale: /en|de/ do
     resources :notes do
-      resources :share, controller: 'shared_notes'
+      resources :share
     end
 
     get 'about' => 'pages#about'

@@ -10,8 +10,11 @@
     </table>
   </div>
   <ul class="list-group">
-    <% @note.shared_notes.each do |share| %>
-    <li class="list-group-item"><%= share.user.username %></li>
+    <% @note.shares.each do |share| %>
+    <li class="list-group-item">
+      <%= link_to '&times;'.html_safe, note_share_path(@note, share), method: :delete, data: { confirm: t(:confirmremoveshare) }, class: 'close' %>
+      <%= share.user.username %>
+    </li>
     <% end %>
   </ul>
 </div>
@@ -25,7 +28,7 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="lblAdd"><%= t :share %></h4>
       </div>
-      <%= form_tag note_share_index_path(@note) do |f| %>
+      <%= form_tag note_share_index_path do %>
         <div class="modal-body">
           <div class="form-group">
             <%= label_tag :username, t('user.username') %><br>

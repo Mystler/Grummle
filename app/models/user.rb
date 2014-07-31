@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :notes, dependent: :destroy
-  has_many :shared_notes, dependent: :destroy
+  has_many :shares, dependent: :destroy
 
   validates :username, uniqueness: { case_sensitive: false }, length: { in: 3..24 }, format: { with: /\A\S+\Z/ }
   validates :email, uniqueness: { case_sensitive: false }, format: { with: /\S+@\S+\.\w+/ }

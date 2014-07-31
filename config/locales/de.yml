@@ -6,6 +6,7 @@ de:
   noteerror: 'Etwas verhinderte, dass diese Notiz gespeichert wird:'
   notfound: Notiz nicht gefunden
   publichint: Dies ist eine öffentliche Notiz. Jeder mit dem Link kann sie betrachten.
+  confirmremovenote: 'Sind Sie sicher, dass Sie diese Notiz löschen wollen?'
   back: Zurück
 
   nopermission: Sie haben keine Berechtigung diese Seite zu sehen.
@@ -15,6 +16,7 @@ de:
   noteshared: Sie haben diese Notiz erfolgreich geteilt.
   sharingfailed: 'Notiz konnte nicht geteilt werden. Es ist möglich, dass der gewünschte Benutzer nicht existiert.'
   sharedwithme: Mit Mir Geteilt
+  confirmremoveshare: 'Sind Sie sicher, dass Sie nicht mehr mit diesem Nutzer teilen wollen?'
 
   account: Konto
   signup: Registrieren

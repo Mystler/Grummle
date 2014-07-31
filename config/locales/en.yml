@@ -6,6 +6,7 @@ en:
   noteerror: 'Something prohibited this note from being saved:'
   notfound: Note not found
   publichint: This is a public note. Anyone with the link will be able to view it.
+  confirmremovenote: Are you sure you want to delete this note?
   back: Back
 
   nopermission: You have no permission to view this site.
@@ -15,6 +16,7 @@ en:
   noteshared: You have successfully shared this note.
   sharingfailed: Could not share this note. Maybe the user you want to share with does not exist.
   sharedwithme: Shared With Me
+  confirmremoveshare: Are you sure you want to stop sharing with this user?
 
   account: Account
   signup: Sign Up

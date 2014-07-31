@@ -15,13 +15,13 @@
     <% end %>
   </ul>
 </div>
-<% if current_user.shared_notes.any? %>
+<% if current_user.shares.any? %>
 <div class="panel panel-default">
   <div class="panel-heading">
     <b class="panel-title"><%= t :sharedwithme %></b>
   </div>
   <ul class="list-group">
-    <% current_user.shared_notes.each do |share| %>
+    <% current_user.shares.each do |share| %>
     <%= link_to share.note.title, share.note, class: 'list-group-item' %>
     <% end %>
   </ul>
