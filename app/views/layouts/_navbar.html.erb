@@ -11,7 +11,7 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
-        <%= content_tag :li, class: active_controller('notes') do %>
+        <%= content_tag :li, class: active_controller('notes') || active_controller('share') do %>
           <%= link_to t(:notes), notes_path %>
         <% end %>
         <%= content_tag :li, class: active_page(about_path) do %>

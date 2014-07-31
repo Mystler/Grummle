@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Grummle Notiz Geteilt</h1>
+    <p>
+      <%= @user.username %>, <%= @note.user.username %> hat eine Notiz mit Ihnen geteilt:<br>
+      <%= @note.title %>
+    </p>
+    <p>
+      Sie haben nun die Berechtigung diese Notiz zu sehen und bearbeiten. Falls Sie eingeloggt sind, können Sie einfach hier klicken:<br>
+      <%= link_to 'Geteilte Notiz ansehen', note_url(@note) %>
+    </p>
+    <p>Einen schönen Tag noch!</p>
+  </body>
+</html>

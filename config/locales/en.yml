@@ -17,6 +17,7 @@ en:
   sharingfailed: Could not share this note. Maybe the user you want to share with does not exist.
   sharedwithme: Shared With Me
   confirmremoveshare: Are you sure you want to stop sharing with this user?
+  owner: Owner
 
   account: Account
   signup: Sign Up
@@ -48,6 +49,7 @@ en:
   activation_email_subject: '[Grummle] Account Activation'
   password_email_subject: '[Grummle] Password Reset'
   change_email_subject: '[Grummle] E-Mail Address Change'
+  note_shared_email_subject: '[Grummle] Note Shared'
 
   about: About
   language: Language

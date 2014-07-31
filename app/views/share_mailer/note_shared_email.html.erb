@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Grummle Note Shared</h1>
+    <p>
+      <%= @user.username %>, <%= @note.user.username %> has shared a note with you:<br>
+      <%= @note.title %>
+    </p>
+    <p>
+      You now have the rights to view and edit this note. If you are logged in, you can simply click on this link:<br>
+      <%= link_to 'View shared note', note_url(@note) %>
+    </p>
+    <p>Have a nice day!</p>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+Grummle Note Shared
+===================
+ 
+<%= @user.username %>, <%= @note.user.username %> has shared a note with you:
+<%= @note.title %>
+ 
+You now have the rights to view and edit this note. If you are logged in, you can simply click on this link:
+<%= note_url @note %>
+ 
+Have a nice day!

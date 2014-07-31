@@ -17,6 +17,7 @@ de:
   sharingfailed: 'Notiz konnte nicht geteilt werden. Es ist möglich, dass der gewünschte Benutzer nicht existiert.'
   sharedwithme: Mit Mir Geteilt
   confirmremoveshare: 'Sind Sie sicher, dass Sie nicht mehr mit diesem Nutzer teilen wollen?'
+  owner: Eigentümer
 
   account: Konto
   signup: Registrieren
@@ -48,6 +49,7 @@ de:
   activation_email_subject: '[Grummle] Kontoaktivierung'
   password_email_subject: '[Grummle] Passwort Zurücksetzen'
   change_email_subject: '[Grummle] E-Mail-Adresse Ändern'
+  note_shared_email_subject: '[Grummle] Notiz Geteilt'
 
   about: Über
   language: Sprache

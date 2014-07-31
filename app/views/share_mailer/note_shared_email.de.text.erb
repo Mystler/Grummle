@@ -1,0 +1,10 @@
+Grummle Notiz Geteilt
+=====================
+
+<%= @user.username %>, <%= @note.user.username %> hat eine Notiz mit Ihnen geteilt:
+<%= @note.title %>
+
+Sie haben nun die Berechtigung diese Notiz zu sehen und bearbeiten. Falls Sie eingeloggt sind, können Sie einfach hier klicken:
+<%= note_url @note %>
+
+Einen schönen Tag noch!

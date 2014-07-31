@@ -65,6 +65,6 @@ class NotesController < ApplicationController
     end
 
     def shared_with_me?(note)
-      current_user && current_user.shared_notes.find_by_note_id(note.id)
+      current_user && current_user.shares.find_by_note_id(note.id)
     end
 end
