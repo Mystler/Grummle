@@ -24,3 +24,10 @@ publicnote:
   text: Publique
   public: true
   permalink: ddd
+
+sharednote:
+  id: 5
+  title: Sharing
+  text: Shared
+  user_id: 1
+  permalink: eee

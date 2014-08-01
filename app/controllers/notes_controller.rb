@@ -20,7 +20,11 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @note = current_user.notes.find_by_permalink!(params[:id])
+    @note = Note.find_by_permalink!(params[:id])
+    if !my_note?(@note) && !shared_with_me?(@note)
+      flash[:danger] = t :nopermission
+      redirect_to notes_path
+    end
   end
 
   def show
@@ -29,7 +33,7 @@ class NotesController < ApplicationController
       unless @note.public
         require_login
         return unless current_user
-        unless my_note?(@note) || shared_with_me?(@note)
+        if !my_note?(@note) && !shared_with_me?(@note)
           flash[:danger] = t :notfound
           redirect_to notes_path
         end
@@ -41,11 +45,16 @@ class NotesController < ApplicationController
   end
 
   def update
-    @note = current_user.notes.find_by_permalink!(params[:id])
-    if @note.update(note_params)
-      redirect_to @note
+    @note = Note.find_by_permalink!(params[:id])
+    if !my_note?(@note) && !shared_with_me?(@note)
+      flash[:danger] = t :nopermission
+      redirect_to notes_path
     else
-      render 'edit'
+      if @note.update(note_params)
+        redirect_to @note
+      else
+        render 'edit'
+      end
     end
   end
 

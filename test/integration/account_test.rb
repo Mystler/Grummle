@@ -39,15 +39,21 @@ class AccountTest < ActionDispatch::IntegrationTest
     get_via_redirect note_path(notes(:testnote).permalink)
     assert_equal notes_path, path, 'Not redirected when accessing another user\'s note'
     assert flash[:danger]
-    assert_raises(ActiveRecord::RecordNotFound) do
-      get edit_note_path(notes(:testnote).permalink)
-    end
-    assert_raises(ActiveRecord::RecordNotFound) do
-      patch note_path(notes(:testnote).permalink), note: { title: 'HAAAAX', text: 'Blah', public: true }
-    end
+    get_via_redirect edit_note_path(notes(:testnote).permalink)
+    assert_equal notes_path, path, 'Not redirected when accessing another user\'s note'
+    assert flash[:danger]
+    patch_via_redirect note_path(notes(:testnote).permalink), note: { title: 'HAAAAX', text: 'Blah', public: true }
+    assert_equal notes_path, path, 'Not redirected when accessing another user\'s note'
+    assert flash[:danger]
     assert_raises(ActiveRecord::RecordNotFound) do
       delete note_path(notes(:testnote).permalink)
     end
+    get_via_redirect note_share_index_path(notes(:testnote).permalink)
+    assert_equal notes_path, path, 'Not redirected when trying to share another user\'s note'
+    assert flash[:danger]
+    post_via_redirect note_share_index_path(notes(:testnote).permalink), username: 'Üßerdingens♪♫'
+    assert_equal notes_path, path, 'Not redirected when trying to share another user\'s note'
+    assert flash[:danger]
 
     # Change Password and e-mail
     get edituser_path

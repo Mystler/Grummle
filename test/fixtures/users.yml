@@ -5,3 +5,11 @@ testuser:
   password_digest: <%= BCrypt::Password.create('passawordo') %>
   auth_token: testtoken
   activated: true
+
+sharetest:
+  id: 2
+  username: Shareboy
+  email: share@boy.org
+  password_digest: <%= BCrypt::Password.create('sharepw') %>
+  auth_token: sahretoken
+  activated: true

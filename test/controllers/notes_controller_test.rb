@@ -4,7 +4,8 @@ class NotesControllerTest < ActionController::TestCase
   test 'redirect on record not found' do
     do_login
     get :show, id: '123456'
-    assert_redirected_to notes_path(assigns(:flash), locale: :en), 'Note not found does not redirect'
+    assert_redirected_to notes_path, 'Note not found does not redirect'
+    assert flash[:danger]
     do_logout
   end
 
@@ -35,7 +36,17 @@ class NotesControllerTest < ActionController::TestCase
   test 'access restricted' do
     do_login
     get :show, id: notes(:userless).permalink
-    assert_redirected_to notes_path(assigns(:flash), locale: :en), 'Not redirected from userless note'
+    assert_redirected_to notes_path, 'Not redirected from userless note'
+    assert flash[:danger]
+    get :edit, id: notes(:userless).permalink
+    assert_redirected_to notes_path
+    assert flash[:danger]
+    patch :update, id: notes(:userless).permalink, note: {title: 'Test'}
+    assert_redirected_to notes_path
+    assert flash[:danger]
+    assert_raises(ActiveRecord::RecordNotFound) do
+      delete :destroy, id: notes(:userless).permalink
+    end
     do_logout
   end
 
@@ -47,12 +58,12 @@ class NotesControllerTest < ActionController::TestCase
 
   test 'edit public notes' do
     do_login
-    assert_raises(ActiveRecord::RecordNotFound) do
-      get :edit, id: notes(:publicnote).permalink
-    end
-    assert_raises(ActiveRecord::RecordNotFound) do
-      patch :update, id: notes(:publicnote).permalink, note: {title: 'Test'}
-    end
+    get :edit, id: notes(:publicnote).permalink
+    assert_redirected_to notes_path
+    assert flash[:danger]
+    patch :update, id: notes(:publicnote).permalink, note: {title: 'Test'}
+    assert_redirected_to notes_path
+    assert flash[:danger]
     do_logout
   end
 end
