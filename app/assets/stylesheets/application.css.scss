@@ -8,7 +8,10 @@
 $bg-dark: #EEE;
 $bg: #FFF;
 
-body { background-color: $bg-dark; }
+body {
+    background-color: $bg-dark;
+    padding-top: 70px;
+}
 
 .container {
     margin: 24px auto;
