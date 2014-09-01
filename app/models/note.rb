@@ -13,7 +13,7 @@ class Note < ActiveRecord::Base
 
   def generate_permalink
     begin
-      link = SecureRandom.urlsafe_base64
+      link = SecureRandom.urlsafe_base64(8)
     end while Note.exists?(permalink: link)
     self.permalink = link
   end
