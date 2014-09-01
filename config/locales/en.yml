@@ -30,6 +30,7 @@ en:
   loginrequired: You have to log in to view this page.
   signedinas: "Signed in as %{user}"
   edituser: Account Settings
+  changepassword: Change Password
   passwordchanged: You have successfully changed your password.
   emailchange: Please look into your inbox and confirm your new e-mail-address.
   pwdoesnotmatch: Your current password is wrong.

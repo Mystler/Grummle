@@ -92,7 +92,7 @@ class UsersController < ApplicationController
   def update_password
     @user = User.find_by!(username: params[:username], auth_token: params[:token])
     if @user.update(change_password_params)
-      flash[:success] = t :changedpassword
+      flash[:success] = t :passwordchanged
       redirect_to login_path
     else
       render 'new_password'

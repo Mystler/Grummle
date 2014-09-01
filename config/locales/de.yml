@@ -30,6 +30,7 @@ de:
   loginrequired: Sie müssen sich Anmelden um diese Seite zu betrachten.
   signedinas: "Angemeldet als %{user}"
   edituser: Konto-Einstellungen
+  changepassword: Passwort Ändern
   passwordchanged: Sie haben erfolgreich Ihr Passwort geändert.
   emailchange: Bitte schauen Sie in ihr Postfach und bestätigen Sie ihre neue E-Mail-Adresse.
   pwdoesnotmatch: Ihr aktuelles Passwort ist falsch.

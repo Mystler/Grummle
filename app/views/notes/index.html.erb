@@ -21,7 +21,7 @@
     <b class="panel-title"><%= t :sharedwithme %></b>
   </div>
   <ul class="list-group">
-    <% current_user.shares.each do |share| %>
+    <% current_user.shares.includes(:note).order('notes.updated_at DESC').each do |share| %>
     <%= link_to share.note.title, share.note, class: 'list-group-item' %>
     <% end %>
   </ul>
