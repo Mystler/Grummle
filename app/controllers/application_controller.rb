@@ -4,19 +4,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_locale
-  before_filter :mail_url_options
+  before_action :mail_url_options
   helper_method :current_user
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
-  end
-
-  def default_url_options(options={})
-    { locale: I18n.locale }
+    cookies.permanent[:loc] = params[:loc] if params[:loc]
+    I18n.locale = cookies[:loc] || I18n.default_locale
   end
 
   def mail_url_options
-    ActionMailer::Base.default_url_options = {host: request.host_with_port, protocol: request.protocol, locale: I18n.locale}
+    ActionMailer::Base.default_url_options = { host: request.host_with_port, protocol: request.protocol }
   end
 
   private
