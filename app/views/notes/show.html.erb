@@ -19,7 +19,7 @@
           <%= link_to t(:edit), edit_note_path(@note), class: 'btn btn-success' if my_note?(@note) || shared_with_me?(@note) %>
           <% if my_note?(@note) %>
           <%= link_to t(:share), note_share_index_path(@note), class: 'btn btn-info' %>
-          <%= link_to t(:delete), @note, method: :delete, data: { confirm: t(:confirmremovenote) }, class: 'btn btn-danger' %>
+          <button class="btn btn-danger" data-toggle="modal" data-target="#dlgDelete"><%= t :delete %></button>
           <% end %>
         </td>
       </tr>
@@ -30,3 +30,24 @@
   </div>
 </div>
 <p><%= link_to t(:back), notes_path %></p>
+
+<% if my_note?(@note) %>
+<!-- Delete Dialog -->
+<div class="modal fade" id="dlgDelete" tabindex="-1" role="dialog" aria-labelledby="lblDelete" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="lblDelete"><%= @note.title %></h4>
+      </div>
+      <div class="modal-body">
+        <%= t :confirmremovenote %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= link_to t(:delete), @note, method: :delete, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
