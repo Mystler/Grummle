@@ -4,14 +4,16 @@
       <tr>
         <td>
           <b class="panel-title"><%= @note.title %></b>
-          <% if @note.public %>
-          <br><i><%= t :publichint %></i>
-          <% end %>
-          <% if @note.shares.any? && (my_note?(@note) || shared_with_me?(@note)) %>
+          <% if @note.public || @note.shares.any? %>
           <br>
           <i>
-            <%= t :owner %>: <%= @note.user.username %><br>
-            <%= t(:sharedwith).titleize %>: <%= @note.shares.collect{|share| share.user.username}.join(", ") %>
+            <%= t(:createdby).titleize %>: <%= @note.user.username %>
+            <% if @note.shares.any? %>
+            <br><%= t(:sharedwith).titleize %>: <%= @note.shares.collect{|share| share.user.username}.join(", ") %>
+            <% end %>
+            <% if @note.public %>
+            <br><%= t :publichint %>
+            <% end %>
           </i>
           <% end %>
         </td>

@@ -17,7 +17,7 @@ en:
   sharingfailed: Could not share this note. Maybe the user you want to share with does not exist.
   sharedwithme: Shared With Me
   confirmremoveshare: Are you sure you want to stop sharing with this user?
-  owner: Owner
+  createdby: Created by
 
   account: Account
   signup: Sign Up
