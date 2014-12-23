@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(new_user_params)
     @user.activated = false
     if @user.save
-      UserMailer.registered_email(@user).deliver
+      UserMailer.registered_email(@user).deliver_now
       flash[:success] = t :accountcreated
       redirect_to login_path
     else
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       if params[:user][:email] != @user.email
         @user.email = params[:user][:email]
         if @user.valid?
-          UserMailer.change_email_email(@user).deliver
+          UserMailer.change_email_email(@user).deliver_now
           flash.now[:warning] = t :emailchange
         end
       end
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
   def resend_activation
     @user = User.find_by!(username: params[:username], activated: false)
-    UserMailer.activation_email(@user).deliver
+    UserMailer.activation_email(@user).deliver_now
     flash[:success] = t :activationrequested
     redirect_to login_path
   end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
   def reset_password
     @user = User.find_by(username: params[:username], email: params[:email])
     if @user
-      UserMailer.password_email(@user).deliver
+      UserMailer.password_email(@user).deliver_now
       flash[:success] = t :passwordresetemail
       redirect_to login_path
     else

@@ -9,7 +9,7 @@ class ShareController < ApplicationController
     if user && user.id != current_user.id && !@note.shares.find_by_user_id(user.id)
       share = @note.shares.new(user_id: user.id)
       share.save!
-      ShareMailer.note_shared_email(@note, user).deliver
+      ShareMailer.note_shared_email(@note, user).deliver_now
       flash[:success] = t :noteshared
     else
       flash[:danger] = t :sharingfailed
