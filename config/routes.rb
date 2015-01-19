@@ -20,6 +20,8 @@ Grummle::Application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
+  get 'auth/:provider/callback' => 'sessions#create_oauth'
+  get 'auth/failure' => 'sessions#oauth_failed'
 
   root 'notes#index'
 end

@@ -1,4 +1,5 @@
 de:
+  ### Notes
   notes: Meine Notizen
   newnote: Neue Notiz
   edit: Bearbeiten
@@ -9,6 +10,7 @@ de:
   confirmremovenote: 'Sind Sie sicher, dass Sie diese Notiz löschen wollen?'
   back: Zurück
 
+  ### Shares
   nopermission: Sie haben keine Berechtigung diese Seite zu sehen.
   sharedwith: geteilt mit
   share: Teilen
@@ -19,6 +21,7 @@ de:
   confirmremoveshare: 'Sind Sie sicher, dass Sie nicht mehr mit diesem Nutzer teilen wollen?'
   createdby: Erstellt von
 
+  ### Account
   account: Konto
   signup: Registrieren
   loggedin: Sie wurden erfolgreich angemeldet.
@@ -31,6 +34,7 @@ de:
   signedinas: "Angemeldet als %{user}"
   edituser: Konto-Einstellungen
   changepassword: Passwort Ändern
+  usernamechanged: Sie haben erfolgreich Ihren Benutzernamen geändert.
   passwordchanged: Sie haben erfolgreich Ihr Passwort geändert.
   emailchange: Bitte schauen Sie in ihr Postfach und bestätigen Sie ihre neue E-Mail-Adresse.
   pwdoesnotmatch: Ihr aktuelles Passwort ist falsch.
@@ -46,15 +50,25 @@ de:
   passwordresetemail: Sie sollten eine E-Mail erhalten haben um ein neues Passwort zu erstellen.
   emailchangeconfirmed: Ihre neue E-Mail-Adresse wurde bestätigt.
 
+  ### Omniauth
+  oauth_connected: Ihr Benutzerkonto wurde erfolgreich verknüpft.
+  oauth_usercreated: Für Sie wurde ein neues Konto erstellt. Bitte überprüfen Sie Ihre Daten in den Einstellungen.
+  oauth_failed: Identität konnte vom Provider nicht verifiziert werden.
+  login_google: Mit Google anmelden
+  login_facebook: Mit Facebook anmelden
+
+  ### E-Mails
   registered_email_subject: '[Grummle] Konto Registriert'
   activation_email_subject: '[Grummle] Kontoaktivierung'
   password_email_subject: '[Grummle] Passwort Zurücksetzen'
   change_email_subject: '[Grummle] E-Mail-Adresse Ändern'
   note_shared_email_subject: '[Grummle] Notiz Geteilt'
 
+  ### Navbar
   about: Über
   language: Sprache
 
+  ### Models
   user: &user
     username: Nutzername
     email: E-Mail Adresse

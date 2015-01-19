@@ -23,8 +23,18 @@ class ApplicationController < ActionController::Base
 
     def require_login
       unless current_user
-        flash[:danger] = t :loginrequired
+        flash_message :danger, t(:loginrequired)
         redirect_to login_path
       end
+    end
+
+    def flash_message(type, msg)
+      flash[type] ||= []
+      flash[type] << msg
+    end
+
+    def flash_now(type, msg)
+      flash.now[type] ||= []
+      flash.now[type] << msg
     end
 end

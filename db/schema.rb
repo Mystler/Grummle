@@ -11,22 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728104603) do
+ActiveRecord::Schema.define(version: 20150119143557) do
 
-  create_table "notes", force: true do |t|
-    t.string   "title"
+  create_table "authorizations", force: :cascade do |t|
+    t.string  "provider"
+    t.string  "uid"
+    t.integer "user_id"
+  end
+
+  add_index "authorizations", ["provider", "uid"], name: "index_authorizations_on_provider_and_uid"
+  add_index "authorizations", ["user_id"], name: "index_authorizations_on_user_id"
+
+  create_table "notes", force: :cascade do |t|
+    t.string   "title",      limit: 255
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "public"
-    t.string   "permalink"
+    t.string   "permalink",  limit: 255
   end
 
   add_index "notes", ["permalink"], name: "index_notes_on_permalink"
   add_index "notes", ["user_id"], name: "index_notes_on_user_id"
 
-  create_table "shares", force: true do |t|
+  create_table "shares", force: :cascade do |t|
     t.integer "note_id"
     t.integer "user_id"
   end
@@ -34,13 +43,13 @@ ActiveRecord::Schema.define(version: 20140728104603) do
   add_index "shares", ["note_id"], name: "index_shares_on_note_id"
   add_index "shares", ["user_id"], name: "index_shares_on_user_id"
 
-  create_table "users", force: true do |t|
-    t.string   "username"
-    t.string   "email"
-    t.string   "password_digest"
+  create_table "users", force: :cascade do |t|
+    t.string   "username",           limit: 255
+    t.string   "email",              limit: 255
+    t.string   "password_digest",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "auth_token"
+    t.string   "auth_token",         limit: 255
     t.datetime "auth_token_updated"
     t.boolean  "activated"
   end

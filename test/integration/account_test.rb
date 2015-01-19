@@ -26,7 +26,7 @@ class AccountTest < ActionDispatch::IntegrationTest
 
     post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'testtest'
     assert_equal login_path, path, 'Logging in should have failed'
-    assert_match resend_activation_path(username: 'Üßerdingens♪♫'), flash[:danger], 'Cannot request activation e-mail'
+    assert_match resend_activation_path(username: 'Üßerdingens♪♫'), flash[:danger].first, 'Cannot request activation e-mail'
     get_via_redirect activate_path(username: 'Üßerdingens♪♫', token: token)
     assert flash[:success]
 
@@ -111,5 +111,39 @@ class AccountTest < ActionDispatch::IntegrationTest
     get_via_redirect logout_path
     assert_equal login_path, path
     assert flash[:success]
+  end
+
+  test 'oauth scenario' do
+    OmniAuth.config.test_mode = true
+
+    # Failure test
+    OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
+    silence_omniauth { get_via_redirect '/auth/google_oauth2' }
+    assert_equal login_path, path, 'Not redirected to login'
+    assert flash[:danger]
+
+    # Setup test hashes
+    google_hash = OmniAuth::AuthHash.new({provider: 'google_oauth2', uid: '123545', info: {name: 'Omniauth Test', email: 'omni@auth.org'}})
+    facebook_hash = OmniAuth::AuthHash.new({provider: 'facebook', uid: '123545', info: {name: 'Omniauth Test', email: 'omni@auth.org'}})
+    OmniAuth.config.mock_auth[:google_oauth2] = google_hash
+    OmniAuth.config.mock_auth[:facebook] = facebook_hash
+
+    # Create a new user from Google oauth
+    get_via_redirect '/auth/google_oauth2'
+    assert_equal notes_path, path, 'Not redirected to notes index'
+    assert_match 'created', flash[:success].first
+
+    # Connect their Facebook account
+    get_via_redirect '/auth/facebook'
+    assert_equal notes_path, path, 'Not redirected to notes index'
+    assert_match 'connected', flash[:success].first
+
+    # Change username
+    get edituser_path
+    assert_response :success
+    patch_via_redirect edituser_path, user: { username: 'OAuth' }
+    assert_equal edituser_path, path, 'Uhm... why have we been redirected?'
+    assert flash[:success]
+    assert User.find_by_username('OAuth')
   end
 end

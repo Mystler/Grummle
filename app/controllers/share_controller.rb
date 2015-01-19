@@ -10,9 +10,9 @@ class ShareController < ApplicationController
       share = @note.shares.new(user_id: user.id)
       share.save!
       ShareMailer.note_shared_email(@note, user).deliver_now
-      flash[:success] = t :noteshared
+      flash_message :success, t(:noteshared)
     else
-      flash[:danger] = t :sharingfailed
+      flash_message :danger, t(:sharingfailed)
     end
     redirect_to note_share_index_path
   end
@@ -29,7 +29,7 @@ class ShareController < ApplicationController
       return unless current_user
       @note = current_user.notes.find_by_permalink(params[:note_id])
       unless @note
-        flash[:danger] = t :nopermission
+        flash_message :danger, t(:nopermission)
         redirect_to notes_path
       end
     end

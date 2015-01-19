@@ -26,12 +26,7 @@ class UserTest < ActiveSupport::TestCase
 
   test 'password length' do
     user = User.new(username: 'Bob3', email: 'bob3@bob.com', password: 'pw', password_confirmation: 'pw')
-    assert !user.save, 'Saved user with less than 8 characters in the username'
-  end
-
-  test 'username format' do
-    user = User.new(username: 'Bob With Spaces', email: 'bobspace@bob.com', password: 'pwpwpwpw', password_confirmation: 'pwpwpwpw')
-    assert !user.save, 'Saved user with spaces in the username'
+    assert !user.save, 'Saved user with less than 8 characters in the password'
   end
 
   test 'login works correctly' do

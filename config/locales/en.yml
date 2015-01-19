@@ -1,4 +1,5 @@
 en:
+  ### Notes
   notes: My Notes
   newnote: New Note
   edit: Edit
@@ -9,6 +10,7 @@ en:
   confirmremovenote: Are you sure you want to delete this note?
   back: Back
 
+  ### Shares
   nopermission: You have no permission to view this site.
   sharedwith: shared with
   share: Share
@@ -19,6 +21,7 @@ en:
   confirmremoveshare: Are you sure you want to stop sharing with this user?
   createdby: Created by
 
+  ### Account
   account: Account
   signup: Sign Up
   loggedin: You have successfully been logged in.
@@ -31,6 +34,7 @@ en:
   signedinas: "Signed in as %{user}"
   edituser: Account Settings
   changepassword: Change Password
+  usernamechanged: You have successfully chaged your username.
   passwordchanged: You have successfully changed your password.
   emailchange: Please look into your inbox and confirm your new e-mail-address.
   pwdoesnotmatch: Your current password is wrong.
@@ -46,15 +50,25 @@ en:
   passwordresetemail: You should have got an e-mail to create a new password.
   emailchangeconfirmed: Your new e-mail address has been confirmed.
 
+  ### Omniauth
+  oauth_connected: Your account has successfully been connected.
+  oauth_usercreated: A new account has been created for you. Please verify your data in the settings.
+  oauth_failed: Could not verify your identity with the provider.
+  login_google: Login with Google
+  login_facebook: Login with Facebook
+
+  ### E-Mails
   registered_email_subject: '[Grummle] Account Registered'
   activation_email_subject: '[Grummle] Account Activation'
   password_email_subject: '[Grummle] Password Reset'
   change_email_subject: '[Grummle] E-Mail Address Change'
   note_shared_email_subject: '[Grummle] Note Shared'
 
+  ### Navbar
   about: About
   language: Language
 
+  ### Models
   user: &user
     username: Username
     email: E-Mail Address

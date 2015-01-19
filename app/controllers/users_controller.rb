@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user.activated = false
     if @user.save
       UserMailer.registered_email(@user).deliver_now
-      flash[:success] = t :accountcreated
+      flash_message :success, t(:accountcreated)
       redirect_to login_path
     else
       render 'new'
@@ -25,21 +25,29 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    user = @user.authenticate(params[:password_old])
-    if user
-      if !params[:user][:password].blank? && @user.update(change_password_params)
+    if params[:user][:username] != @user.username
+      if @user.update(change_username_params)
         cookies[:auth_token] = @user.auth_token
-        flash.now[:success] = t :passwordchanged
+        flash_now :success, t(:usernamechanged)
       end
-      if params[:user][:email] != @user.email
-        @user.email = params[:user][:email]
-        if @user.valid?
-          UserMailer.change_email_email(@user).deliver_now
-          flash.now[:warning] = t :emailchange
+    end
+    unless params[:user][:password].blank?
+      user = @user.authenticate(params[:password_old])
+      if user
+        if @user.update(change_password_params)
+          cookies[:auth_token] = @user.auth_token
+          flash_now :success, t(:passwordchanged)
         end
+      else
+        flash_now :danger, t(:pwdoesnotmatch)
       end
-    else
-      flash.now[:danger] = t :pwdoesnotmatch
+    end
+    if params[:user][:email] != @user.email
+      @user.email = params[:user][:email]
+      if @user.valid?
+        UserMailer.change_email_email(@user).deliver_now
+        flash_now :warning, t(:emailchange)
+      end
     end
     render 'edit'
   end
@@ -49,14 +57,14 @@ class UsersController < ApplicationController
     @user = User.find_by!(username: params[:username], auth_token: params[:token], activated: false)
     @user.activated = true
     @user.save!
-    flash[:success] = t :activated
+    flash_message :success, t(:activated)
     redirect_to login_path
   end
 
   def resend_activation
     @user = User.find_by!(username: params[:username], activated: false)
     UserMailer.activation_email(@user).deliver_now
-    flash[:success] = t :activationrequested
+    flash_message :success, t(:activationrequested)
     redirect_to login_path
   end
 
@@ -65,7 +73,7 @@ class UsersController < ApplicationController
     @user.email = params[:email]
     @user.save!
     cookies[:auth_token] = @user.auth_token
-    flash[:success] = t :emailchangeconfirmed
+    flash_message :success, t(:emailchangeconfirmed)
     redirect_to notes_path
   end
 
@@ -77,10 +85,10 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username], email: params[:email])
     if @user
       UserMailer.password_email(@user).deliver_now
-      flash[:success] = t :passwordresetemail
+      flash_message :success, t(:passwordresetemail)
       redirect_to login_path
     else
-      flash.now[:danger] = t :accountnotfound
+      flash_now :danger, t(:accountnotfound)
       render 'forgot_password'
     end
   end
@@ -92,7 +100,7 @@ class UsersController < ApplicationController
   def update_password
     @user = User.find_by!(username: params[:username], auth_token: params[:token])
     if @user.update(change_password_params)
-      flash[:success] = t :passwordchanged
+      flash_message :success, t(:passwordchanged)
       redirect_to login_path
     else
       render 'new_password'
@@ -107,5 +115,9 @@ class UsersController < ApplicationController
 
     def change_password_params
       params.require(:user).permit(:password, :password_confirmation)
+    end
+
+    def change_username_params
+      params.require(:user).permit(:username)
     end
 end

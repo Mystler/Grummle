@@ -18,5 +18,7 @@
     <%= submit_tag t(:login), class: 'pull-right btn btn-success' %>
   </div>
 <% end %>
+<i class="fa fa-google-plus" style="width: 20px"></i><%= link_to t(:login_google), '/auth/google_oauth2' %><br>
+<i class="fa fa-facebook" style="width: 20px"></i><%= link_to t(:login_facebook), '/auth/facebook' %><br>
 <%= link_to t(:forgotpassword), forgot_password_path %><br>
 <%= link_to t(:signup), signup_path %>
