@@ -4,7 +4,11 @@
     <table class="full">
       <tr>
         <td><b class="panel-title"><%= @note.title %> <%= t :sharedwith %></b></td>
-        <td class="text-right"><button class="btn btn-success" data-toggle="modal" data-target="#dlgAdd"><%= t :add %></button></td>
+        <td class="text-right">
+          <button class="btn btn-success" data-toggle="modal" data-target="#dlgAdd">
+            <i class="fa fa-plus"></i> <%= t :add %>
+          </button>
+        </td>
       </tr>
     </table>
   </div>

@@ -18,10 +18,18 @@
           <% end %>
         </td>
         <td class="text-right">
-          <%= link_to t(:edit), edit_note_path(@note), class: 'btn btn-success' if my_note?(@note) || shared_with_me?(@note) %>
+          <% if my_note?(@note) || shared_with_me?(@note) %>
+          <%= link_to edit_note_path(@note), class: 'btn btn-success' do %>
+            <i class="fa fa-edit"></i> <%= t :edit %>
+          <% end %>
+          <% end %>
           <% if my_note?(@note) %>
-          <%= link_to t(:share), note_share_index_path(@note), class: 'btn btn-info' %>
-          <button class="btn btn-danger" data-toggle="modal" data-target="#dlgDelete"><%= t :delete %></button>
+          <%= link_to note_share_index_path(@note), class: 'btn btn-info' do %>
+            <i class="fa fa-share"></i> <%= t :share %>
+          <% end %>
+          <button class="btn btn-danger" data-toggle="modal" data-target="#dlgDelete">
+            <i class="fa fa-remove"></i> <%= t :delete %>
+          </button>
           <% end %>
         </td>
       </tr>

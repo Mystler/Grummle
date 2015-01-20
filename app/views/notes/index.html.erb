@@ -1,11 +1,14 @@
-<h1>Grummle</h1>
 <%= render 'shared/flash' %>
 <div class="panel panel-default">
   <div class="panel-heading">
     <table class="full">
       <tr>
         <td><b class="panel-title"><%= t :notes %></b></td>
-        <td class="text-right"><%= link_to t(:newnote), new_note_path, class: 'btn btn-success' %></td>
+        <td class="text-right">
+          <%= link_to new_note_path, class: 'btn btn-success' do %>
+            <i class="fa fa-plus"></i> <%= t :newnote %>
+          <% end %>
+        </td>
       </tr>
     </table>
   </div>
