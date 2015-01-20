@@ -2,14 +2,14 @@
 <%= form_for @user, url: edituser_path do |f| %>
   <%= render 'shared/flash' %>
   <% if @user.errors.any? %>
-  <div class="alert alert-danger">
-    <b><%= t :usererror %></b>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
+    <div class="alert alert-danger">
+      <b><%= t :usererror %></b>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
   <div class="form-group">
     <%= f.label :username %>

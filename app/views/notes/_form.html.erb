@@ -1,13 +1,13 @@
 <%= form_for @note do |f| %>
   <% if @note.errors.any? %>
-  <div class="alert alert-danger">
-    <b><%= t :noteerror %></b>
-    <ul>
-      <% @note.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
+    <div class="alert alert-danger">
+      <b><%= t :noteerror %></b>
+      <ul>
+        <% @note.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
   <div class="form-group">
     <%= f.label :title %>

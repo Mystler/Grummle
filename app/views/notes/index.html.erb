@@ -14,19 +14,19 @@
   </div>
   <ul class="list-group">
     <% current_user.notes.order(updated_at: :desc).each do |note| %>
-    <%= link_to note.title, note, class: 'list-group-item' %>
+      <%= link_to note.title, note, class: 'list-group-item' %>
     <% end %>
   </ul>
 </div>
 <% if current_user.shares.any? %>
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <b class="panel-title"><%= t :sharedwithme %></b>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <b class="panel-title"><%= t :sharedwithme %></b>
+    </div>
+    <ul class="list-group">
+      <% current_user.shares.includes(:note).order('notes.updated_at DESC').each do |share| %>
+        <%= link_to share.note.title, share.note, class: 'list-group-item' %>
+      <% end %>
+    </ul>
   </div>
-  <ul class="list-group">
-    <% current_user.shares.includes(:note).order('notes.updated_at DESC').each do |share| %>
-    <%= link_to share.note.title, share.note, class: 'list-group-item' %>
-    <% end %>
-  </ul>
-</div>
 <% end %>

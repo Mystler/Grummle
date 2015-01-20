@@ -5,31 +5,31 @@
         <td>
           <b class="panel-title"><%= @note.title %></b>
           <% if @note.public || @note.shares.any? %>
-          <br>
-          <i>
-            <%= t(:createdby).titleize %>: <%= @note.user.username %>
-            <% if @note.shares.any? %>
-            <br><%= t(:sharedwith).titleize %>: <%= @note.shares.collect{|share| share.user.username}.join(", ") %>
-            <% end %>
-            <% if @note.public %>
-            <br><%= t :publichint %>
-            <% end %>
-          </i>
+            <br>
+            <i>
+              <%= t(:createdby).titleize %>: <%= @note.user.username %>
+              <% if @note.shares.any? %>
+                <br><%= t(:sharedwith).titleize %>: <%= @note.shares.collect{|share| share.user.username}.join(", ") %>
+              <% end %>
+              <% if @note.public %>
+                <br><%= t :publichint %>
+              <% end %>
+            </i>
           <% end %>
         </td>
         <td class="text-right">
           <% if my_note?(@note) || shared_with_me?(@note) %>
-          <%= link_to edit_note_path(@note), class: 'btn btn-success' do %>
-            <i class="fa fa-edit"></i> <%= t :edit %>
-          <% end %>
+            <%= link_to edit_note_path(@note), class: 'btn btn-success' do %>
+              <i class="fa fa-edit"></i> <%= t :edit %>
+            <% end %>
           <% end %>
           <% if my_note?(@note) %>
-          <%= link_to note_share_index_path(@note), class: 'btn btn-info' do %>
-            <i class="fa fa-share"></i> <%= t :share %>
-          <% end %>
-          <button class="btn btn-danger" data-toggle="modal" data-target="#dlgDelete">
-            <i class="fa fa-remove"></i> <%= t :delete %>
-          </button>
+            <%= link_to note_share_index_path(@note), class: 'btn btn-info' do %>
+              <i class="fa fa-share"></i> <%= t :share %>
+            <% end %>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#dlgDelete">
+              <i class="fa fa-remove"></i> <%= t :delete %>
+            </button>
           <% end %>
         </td>
       </tr>
@@ -42,22 +42,22 @@
 <p><%= link_to t(:back), notes_path %></p>
 
 <% if my_note?(@note) %>
-<!-- Delete Dialog -->
-<div class="modal fade" id="dlgDelete" tabindex="-1" role="dialog" aria-labelledby="lblDelete" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="lblDelete"><%= @note.title %></h4>
-      </div>
-      <div class="modal-body">
-        <%= t :confirmremovenote %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= link_to t(:delete), @note, method: :delete, class: 'btn btn-danger' %>
+  <!-- Delete Dialog -->
+  <div class="modal fade" id="dlgDelete" tabindex="-1" role="dialog" aria-labelledby="lblDelete" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="lblDelete"><%= @note.title %></h4>
+        </div>
+        <div class="modal-body">
+          <%= t :confirmremovenote %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= link_to t(:delete), @note, method: :delete, class: 'btn btn-danger' %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 <% end %>
