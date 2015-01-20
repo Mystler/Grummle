@@ -6,4 +6,5 @@
 /db/*.sqlite3-journal
 
 /log
+/public/assets
 /tmp
