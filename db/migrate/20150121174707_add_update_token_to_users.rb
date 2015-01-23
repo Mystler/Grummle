@@ -2,7 +2,7 @@ class AddUpdateTokenToUsers < ActiveRecord::Migration
   def change
     add_column :users, :update_token, :string
     add_index :users, :update_token
-    remove_column :users, :auth_token_created, :datetime
+    remove_column :users, :auth_token_updated, :datetime
 
     reversible do |dir|
       dir.up do
