@@ -38,6 +38,10 @@ class SessionsController < ApplicationController
     auth = Authorization.find_by provider: auth_hash['provider'], uid: auth_hash['uid']
     if auth
       user = auth.user
+      if user.email != auth_hash['info']['email']
+        user.email = auth_hash['info']['email']
+        user.save!
+      end
       flash_message :success, t(:loggedin)
     else
       user = User.find_by email: auth_hash['info']['email']

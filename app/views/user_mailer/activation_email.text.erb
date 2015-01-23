@@ -4,6 +4,6 @@ Grummle Account Activation
 <%= @user.username %>, you have to activate your Grummle account.
  
 In order to be able to login to the site, you have to verify your e-mail address by clicking this link:
-<%= activate_url username: @user.username, token: @user.auth_token %>
+<%= activate_url username: @user.username, token: @user.update_token %>
  
 Enjoy using Grummle!

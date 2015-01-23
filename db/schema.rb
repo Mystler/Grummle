@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119143557) do
+ActiveRecord::Schema.define(version: 20150121174707) do
 
   create_table "authorizations", force: :cascade do |t|
     t.string  "provider"
@@ -52,9 +52,11 @@ ActiveRecord::Schema.define(version: 20150119143557) do
     t.string   "auth_token",         limit: 255
     t.datetime "auth_token_updated"
     t.boolean  "activated"
+    t.string   "update_token"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token"
+  add_index "users", ["update_token"], name: "index_users_on_update_token"
   add_index "users", ["username"], name: "index_users_on_username"
 
 end

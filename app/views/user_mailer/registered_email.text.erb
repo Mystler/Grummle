@@ -4,6 +4,6 @@ Welcome to Grummle
 <%= @user.username %>, you have successfully registered a Grummle account.
  
 In order to be able to login to the site, you have to verify your e-mail address by clicking this link:
-<%= activate_url username: @user.username, token: @user.auth_token %>
+<%= activate_url username: @user.username, token: @user.update_token %>
  
 Thank you for choosing Grummle and have a nice day!

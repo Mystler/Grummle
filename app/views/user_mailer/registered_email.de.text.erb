@@ -4,6 +4,6 @@ Willkommen bei Grummle
 <%= @user.username %>, Sie haben erfolgreich ein Grummle-Konto angelegt.
  
 Um sich auf der Seite anzumelden, müssen Sie Ihre E-Mail Adresse verifizieren, indem Sie auf folgenden Link klicken:
-<%= activate_url username: @user.username, token: @user.auth_token %>
+<%= activate_url username: @user.username, token: @user.update_token %>
  
 Danke, dass Sie sich für Grummle entschieden haben!

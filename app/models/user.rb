@@ -8,13 +8,16 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: { case_sensitive: false }, format: { with: /\S+@\S+\.\w+/ }
   validates :password, length: { minimum: 7 }, allow_nil: true
 
-  before_save :generate_auth_token
+  before_save :generate_tokens
 
-  def generate_auth_token
+  def generate_tokens
     begin
       token = SecureRandom.urlsafe_base64
     end while User.exists?(auth_token: token)
     self.auth_token = token
-    self.auth_token_updated = DateTime.now
+    begin
+      token = SecureRandom.urlsafe_base64
+    end while User.exists?(update_token: token)
+    self.update_token = token
   end
 end

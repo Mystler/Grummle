@@ -13,7 +13,7 @@ class AccountTest < ActionDispatch::IntegrationTest
     assert flash[:success]
 
     # Test activaton mails and activate
-    token = User.find_by_username('Üßerdingens♪♫').auth_token
+    token = User.find_by_username('Üßerdingens♪♫').update_token
     email = ActionMailer::Base.deliveries.last
     assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
     assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
@@ -64,7 +64,7 @@ class AccountTest < ActionDispatch::IntegrationTest
     assert flash[:success]
     assert flash[:warning]
     assert_equal 'int@gration.test', User.find_by_username('Üßerdingens♪♫').email, 'E-mail should not have changed yet'
-    token = User.find_by_username('Üßerdingens♪♫').auth_token
+    token = User.find_by_username('Üßerdingens♪♫').update_token
     email = ActionMailer::Base.deliveries.last
     assert_equal ['int2@gration.test'], email.to, 'Not sending to new e-mail address'
     assert_match update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
@@ -93,7 +93,7 @@ class AccountTest < ActionDispatch::IntegrationTest
     assert_equal login_path, path, 'Not redirected to login'
     assert flash[:success]
 
-    token = User.find_by_username('Üßerdingens♪♫').auth_token
+    token = User.find_by_username('Üßerdingens♪♫').update_token
     email = ActionMailer::Base.deliveries.last
     assert_match new_password_path(username: 'Üßerdingens♪♫', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
     assert_match new_password_path(username: 'Üßerdingens♪♫', token: token), email.text_part.body.to_s, 'Wrong link in text mail'

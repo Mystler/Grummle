@@ -11,5 +11,5 @@ sharetest:
   username: Shareboy
   email: share@boy.org
   password_digest: <%= BCrypt::Password.create('sharepw') %>
-  auth_token: sahretoken
+  auth_token: sharetoken
   activated: true

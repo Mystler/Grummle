@@ -4,6 +4,6 @@ Grummle E-Mail-Adresse Ändern
 <%= @user.username %>, Sie möchten Ihre E-Mail-Adresse ändern.
 
 Bestätigen Sie, dass dies Ihre neue E-Mail-Adresse ist, indem Sie auf folgenden Link klicken:
-<%= update_email_url username: @user.username, email: @user.email, token: @user.auth_token %>
+<%= update_email_url username: @user.username, email: @user.email, token: @user.update_token %>
 
 Danke, dass Sie Grummle nutzen und einen schönen Tag noch!
