@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>4.2'
+gem 'rails'
 gem 'rails-i18n'
 gem 'sass-rails'
 gem 'uglifier'
@@ -17,6 +17,7 @@ gem 'omniauth-facebook'
 group :development, :test do
   gem 'spring'
   gem 'sqlite3'
+  gem 'rails-controller-testing'
 end
 
 group :production do

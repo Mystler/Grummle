@@ -7,8 +7,9 @@ class AccountTest < ActionDispatch::IntegrationTest
     # Create a new user (including UTF-8 characters that have to be escaped properly)
     get signup_path
     assert_response :success
-    post_via_redirect signup_path, user: { username: 'Üßerdingens♪♫', email: 'int@gration.test', password: 'testtest',
-      password_confirmation: 'testtest' }
+    post signup_path, params: { user: { username: 'Üßerdingens♪♫', email: 'int@gration.test', password: 'testtest',
+      password_confirmation: 'testtest' } }
+    follow_redirect!
     assert_equal login_path, path, 'Signing up failed'
     assert flash[:success]
 
@@ -18,48 +19,56 @@ class AccountTest < ActionDispatch::IntegrationTest
     assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
     assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
 
-    get_via_redirect resend_activation_path(username: 'Üßerdingens♪♫')
+    get resend_activation_path(username: 'Üßerdingens♪♫')
+    follow_redirect!
     assert flash[:success]
     email = ActionMailer::Base.deliveries.last
     assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
     assert_match activate_path(username: 'Üßerdingens♪♫', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
 
-    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'testtest'
+    post login_path, params: { username: 'Üßerdingens♪♫', password: 'testtest' }
     assert_equal login_path, path, 'Logging in should have failed'
     assert_match resend_activation_path(username: 'Üßerdingens♪♫'), flash[:danger].first, 'Cannot request activation e-mail'
-    get_via_redirect activate_path(username: 'Üßerdingens♪♫', token: token)
+    get activate_path(username: 'Üßerdingens♪♫', token: token)
+    follow_redirect!
     assert flash[:success]
 
     # Log in
-    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'testtest'
+    post login_path, params: { username: 'Üßerdingens♪♫', password: 'testtest' }
+    follow_redirect!
     assert_equal notes_path, path, 'Logging in failed'
     assert flash[:success]
 
     # Not allowed to access another user's notes
-    get_via_redirect note_path(notes(:testnote).permalink)
+    get note_path(notes(:testnote).permalink)
+    follow_redirect!
     assert_equal notes_path, path, 'Not redirected when accessing another user\'s note'
     assert flash[:danger]
-    get_via_redirect edit_note_path(notes(:testnote).permalink)
+    get edit_note_path(notes(:testnote).permalink)
+    follow_redirect!
     assert_equal notes_path, path, 'Not redirected when accessing another user\'s note'
     assert flash[:danger]
-    patch_via_redirect note_path(notes(:testnote).permalink), note: { title: 'HAAAAX', text: 'Blah', public: true }
+    patch note_path(notes(:testnote).permalink), params: { note: { title: 'HAAAAX', text: 'Blah', public: true } }
+    follow_redirect!
     assert_equal notes_path, path, 'Not redirected when accessing another user\'s note'
     assert flash[:danger]
     assert_raises(ActiveRecord::RecordNotFound) do
       delete note_path(notes(:testnote).permalink)
     end
-    get_via_redirect note_share_index_path(notes(:testnote).permalink)
+    get note_share_index_path(notes(:testnote).permalink)
+    follow_redirect!
     assert_equal notes_path, path, 'Not redirected when trying to share another user\'s note'
     assert flash[:danger]
-    post_via_redirect note_share_index_path(notes(:testnote).permalink), username: 'Üßerdingens♪♫'
+    post note_share_index_path(notes(:testnote).permalink), params: { username: 'Üßerdingens♪♫' }
+    follow_redirect!
     assert_equal notes_path, path, 'Not redirected when trying to share another user\'s note'
     assert flash[:danger]
 
     # Change Password and e-mail
     get edituser_path
     assert_response :success
-    patch_via_redirect edituser_path, password_old: 'testtest', user: { password: 'newnewnew',
-      password_confirmation: 'newnewnew', email: 'int2@gration.test' }
+    patch edituser_path, params: { password_old: 'testtest', user: { password: 'newnewnew',
+      password_confirmation: 'newnewnew', email: 'int2@gration.test' } }
     assert_equal edituser_path, path, 'Uhm... why have we been redirected?'
     assert flash[:success]
     assert flash[:warning]
@@ -69,27 +78,32 @@ class AccountTest < ActionDispatch::IntegrationTest
     assert_equal ['int2@gration.test'], email.to, 'Not sending to new e-mail address'
     assert_match update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token), email.html_part.body.to_s, 'Wrong link in html mail'
     assert_match update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token), email.text_part.body.to_s, 'Wrong link in text mail'
-    get_via_redirect update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token)
+    get update_email_path(username: 'Üßerdingens♪♫', email: 'int2@gration.test', token: token)
+    follow_redirect!
     assert_equal notes_path, path, 'Expected redirect to notes overview'
     assert flash[:success]
 
     # Log out
-    get_via_redirect logout_path
+    get logout_path
+    follow_redirect!
     assert_equal login_path, path, 'Logout did not redirect to login'
     assert flash[:success]
 
     # Login and out again with new password
-    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'newnewnew'
+    post login_path, params: { username: 'Üßerdingens♪♫', password: 'newnewnew' }
+    follow_redirect!
     assert_equal notes_path, path
     assert flash[:success]
-    get_via_redirect logout_path
+    get logout_path
+    follow_redirect!
     assert_equal login_path, path
     assert flash[:success]
 
     # Test the password reset
     get forgot_password_path
     assert_response :success
-    post_via_redirect reset_password_path, username: 'Üßerdingens♪♫', email: 'int2@gration.test'
+    post reset_password_path, params: { username: 'Üßerdingens♪♫', email: 'int2@gration.test' }
+    follow_redirect!
     assert_equal login_path, path, 'Not redirected to login'
     assert flash[:success]
 
@@ -100,15 +114,18 @@ class AccountTest < ActionDispatch::IntegrationTest
 
     get new_password_path(username: 'Üßerdingens♪♫', token: token)
     assert_response :success
-    patch_via_redirect update_password_path(username: 'Üßerdingens♪♫', token: token), user: { password: 'testtest',
-      password_confirmation: 'testtest' }
+    patch update_password_path(username: 'Üßerdingens♪♫', token: token), params: { user: { password: 'testtest',
+      password_confirmation: 'testtest' } }
+    follow_redirect!
     assert_equal login_path, path, 'Not redirected to login'
     assert flash[:success]
 
-    post_via_redirect login_path, username: 'Üßerdingens♪♫', password: 'testtest'
+    post login_path, params: { username: 'Üßerdingens♪♫', password: 'testtest' }
+    follow_redirect!
     assert_equal notes_path, path
     assert flash[:success]
-    get_via_redirect logout_path
+    get logout_path
+    follow_redirect!
     assert_equal login_path, path
     assert flash[:success]
   end
@@ -118,7 +135,10 @@ class AccountTest < ActionDispatch::IntegrationTest
 
     # Failure test
     OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
-    silence_omniauth { get_via_redirect '/auth/google_oauth2' }
+    silence_omniauth { get '/auth/google_oauth2' }
+    silence_omniauth { follow_redirect! }
+    follow_redirect!
+    follow_redirect!
     assert_equal login_path, path, 'Not redirected to login'
     assert flash[:danger]
 
@@ -129,19 +149,23 @@ class AccountTest < ActionDispatch::IntegrationTest
     OmniAuth.config.mock_auth[:facebook] = facebook_hash
 
     # Create a new user from Google oauth
-    get_via_redirect '/auth/google_oauth2'
+    get '/auth/google_oauth2'
+    follow_redirect!
+    follow_redirect!
     assert_equal notes_path, path, 'Not redirected to notes index'
     assert_match 'created', flash[:success].first
 
     # Connect their Facebook account
-    get_via_redirect '/auth/facebook'
+    get '/auth/facebook'
+    follow_redirect!
+    follow_redirect!
     assert_equal notes_path, path, 'Not redirected to notes index'
     assert_match 'connected', flash[:success].first
 
     # Change username
     get edituser_path
     assert_response :success
-    patch_via_redirect edituser_path, user: { username: 'OAuth' }
+    patch edituser_path, params: { user: { username: 'OAuth' } }
     assert_equal edituser_path, path, 'Uhm... why have we been redirected?'
     assert flash[:success]
     assert User.find_by_username('OAuth')

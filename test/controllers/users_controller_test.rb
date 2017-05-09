@@ -5,19 +5,19 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   test 'current password required' do
     do_login
-    patch :update, password_old: '', user: { password: 'newnewnew',
-      password_confirmation: 'newnewnew', email: 'new@test.com' }
+    patch :update, params: { user: { password_old: '', password: 'newnewnew',
+      password_confirmation: 'newnewnew', email: 'new@test.com' } }
     assert :success
     assert_nil flash[:success]
     assert_nil flash[:warning]
     assert flash[:danger]
-    patch :update, password_old: '', user: { email: 'new@test.com' }
+    patch :update, params: { password_old: '', user: { email: 'new@test.com' } }
     assert :success
     assert_nil flash[:success]
     assert_nil flash[:warning]
     assert flash[:danger]
-    patch :update, password_old: 'wrongpw', user: { password: 'newnewnew',
-      password_confirmation: 'newnewnew', email: 'new@test.com' }
+    patch :update, params: { password_old: 'wrongpw', user: { password: 'newnewnew',
+      password_confirmation: 'newnewnew', email: 'new@test.com' } }
     assert :success
     assert_nil flash[:success]
     assert_nil flash[:warning]
@@ -27,8 +27,8 @@ class UsersControllerTest < ActionController::TestCase
 
   test 'password confirmation required' do
     do_login
-    patch :update, password_old: 'passawordo', user: { password: 'newnewnew',
-      password_confirmation: '' }
+    patch :update, params: { password_old: 'passawordo', user: { password: 'newnewnew',
+      password_confirmation: '' } }
     assert :success
     assert_nil flash[:success]
     assert_nil flash[:warning]
