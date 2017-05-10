@@ -18,6 +18,10 @@ group :development, :test do
   gem 'spring'
   gem 'sqlite3'
   gem 'rails-controller-testing'
+  gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
 end
 
 group :production do
