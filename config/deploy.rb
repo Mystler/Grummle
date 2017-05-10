@@ -28,3 +28,6 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+# Restart passenger with tmp/restart.txt
+set :passenger_restart_with_touch, true
