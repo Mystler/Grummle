@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.8.1'
+lock '3.10.0'
 
 set :application, 'Grummle'
 set :repo_url, 'https://github.com/Mystler/Grummle.git'
