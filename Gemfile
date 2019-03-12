@@ -16,7 +16,7 @@ gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'spring'
-  gem 'sqlite3'
+  gem 'sqlite3', git: "https://github.com/sparklemotion/sqlite3-ruby"
   gem 'rails-controller-testing'
   gem 'capistrano'
   gem 'capistrano-rvm'
