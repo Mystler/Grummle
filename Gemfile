@@ -18,7 +18,7 @@ group :development, :test do
   gem 'spring'
   gem 'sqlite3', git: "https://github.com/sparklemotion/sqlite3-ruby"
   gem 'rails-controller-testing'
-  gem 'capistrano', '3.10.2'
+  gem 'capistrano', '~> 3.10.2'
   gem 'capistrano-rvm'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
