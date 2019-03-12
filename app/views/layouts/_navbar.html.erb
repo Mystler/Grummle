@@ -24,7 +24,7 @@
         <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle bs-tooltip" data-toggle="dropdown" title="<%= t :language %>">
-            <i class="fa fa-language fa-lg-nav"></i> <b class="caret"></b>
+            <i class="fas fa-language fa-lg-nav"></i> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
             <li>
@@ -45,23 +45,23 @@
         <% else %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle bs-tooltip" data-toggle="dropdown" title="<%= t :account %>">
-              <i class="fa fa-user fa-lg-nav"></i> <b class="caret"></b>
+              <i class="fas fa-user fa-lg-nav"></i> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
               <li>
                 <%= link_to new_note_path do %>
-                  <i class="fa fa-plus"></i> <%= t :newnote %>
+                  <i class="fas fa-plus"></i> <%= t :newnote %>
                 <% end %>
               </li>
               <li>
                 <%= link_to edituser_path do %>
-                  <i class="fa fa-cog"></i> <%= t :edituser %>
+                  <i class="fas fa-cog"></i> <%= t :edituser %>
                 <% end %>
               </li>
               <li class="divider"></li>
               <li>
                 <%= link_to logout_path do %>
-                  <i class="fa fa-sign-out"></i> <%= t :logout %>
+                  <i class="fas fa-sign-out-alt"></i> <%= t :logout %>
                 <% end %>
               </li>
             </ul>
