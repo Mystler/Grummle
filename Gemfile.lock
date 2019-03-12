@@ -60,7 +60,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
     builder (3.2.3)
-    capistrano (3.11.0)
+    capistrano (3.10.2)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -238,7 +238,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-sass
-  capistrano
+  capistrano (= 3.10.2)
   capistrano-passenger
   capistrano-rails
   capistrano-rvm
