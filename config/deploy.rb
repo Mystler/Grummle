@@ -21,7 +21,7 @@ set :repo_url, "https://github.com/Mystler/Grummle.git"
 append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/packs", ".bundle", "node_modules"
 
 # Default value for default_env is {}
 # set :default_env, { path: '/opt/ruby/bin:$PATH' }
@@ -31,3 +31,15 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Restart passenger with tmp/restart.txt
 set :passenger_restart_with_touch, true
+
+before "deploy:assets:precompile", "deploy:yarn_install"
+namespace :deploy do
+  desc "Run rake yarn install"
+  task :yarn_install do
+    on roles(:web) do
+      within release_path do
+        execute("cd #{release_path} && yarn install --silent --no-progress --no-audit --no-optional")
+      end
+    end
+  end
+end
