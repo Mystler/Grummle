@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" type="text/css">
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload', defer: true %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js" defer></script>
   <script>
-  window.addEventListener("load", function(){
+  window.addEventListener("turbolinks:load", function(){
   window.cookieconsent.initialise({
     "palette": {
       "popup": {
@@ -32,7 +32,9 @@
 <body>
   <%= render 'layouts/navbar' %>
   <div id="container" class="container">
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
   </div>
 </body>
 </html>

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'rails-i18n'
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -13,10 +13,13 @@ gem 'bcrypt'
 gem 'github-markdown'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection"
+gem "webpacker"
+gem 'bootsnap', require: false
 
 group :development, :test do
   gem 'spring'
-  gem 'sqlite3', git: "https://github.com/sparklemotion/sqlite3-ruby"
+  gem 'sqlite3'
   gem 'rails-controller-testing'
   gem 'capistrano', '~> 3.10.2'
   gem 'capistrano-rvm'

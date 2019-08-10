@@ -8,8 +8,10 @@ ready = ->
     $(".bs-tooltip").tooltip
         placement: "bottom"
         container: "body"
-        trigger: "hover click"
+        trigger: "hover"
+    .click ->
+        $(this).tooltip 'hide'
 
 # HAX because Turbolinks
 $(document).ready ready
-$(document).on "page:load", ready
+$(document).on "turbolinks:load", ready
